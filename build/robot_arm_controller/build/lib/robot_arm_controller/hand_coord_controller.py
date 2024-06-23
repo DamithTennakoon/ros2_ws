@@ -17,6 +17,12 @@ class HandCoordController(Node):
 
         # Initialize connection to robot arm
         self._mc = MyCobot("/dev/ttyACM0", 115200)
+        self._mc.set_color(255, 255, 255)
+        time.sleep(1)
+        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 12) # Init angles
+        time.sleep(5)
+        self._mc.send_coords([93.2, -138.2, 200.9, 180, 7, 95.12], 12, 1)
+        time.sleep(5)
 
         # Construct a publisher object to publish the received data to the topic "raw_input_data"
         self._publish_robot_pose = self.create_publisher(Float64MultiArray, 'robot_pose', 10)
@@ -41,6 +47,10 @@ class HandCoordController(Node):
 
         # Define float object to store move value
         self._incr_pos = 0.5
+
+        # Define integer to store the PWM gripper positional value (0-255)
+        self._is_gripper_open = True # Initialize on open state
+        self._prev_is_gripper_open = self._is_gripper_open 
 
         # Define float object to store joint 0 angle
         self._joint_0_angle = self._cur_position[0]
@@ -88,15 +98,31 @@ class HandCoordController(Node):
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
         # Update the robot arm positional list with hand control list
-        self._cur_position[0] += (-1)*self._hand_control_data[0]*self._incr_pos # Cartesian X
-        self._cur_position[1] += (-1)*self._hand_control_data[2]*self._incr_pos # Cartesian Y
-        self._cur_position[2] += self._hand_control_data[1]*self._incr_pos # Cartesian Z
+        self._cur_position[0] += (-1) * self._hand_control_data[0] * self._incr_pos  # Cartesian X -> removed * self._hand_control_data[6] for pause/resume
+        self._cur_position[1] += (-1) * self._hand_control_data[2] * self._incr_pos  # Cartesian Y
+        self._cur_position[2] += self._hand_control_data[1] * self._incr_pos  # Cartesian Z
 
         # Align Joint #6 with Joint #1
         self._cur_position[5] = self._joint_0_angle - 5
 
         # Trasnmit UART message to robot arm
         self._mc.send_coords(self._cur_position, 60, 1)
+
+        # Check and change the gripper control state
+        if (self._hand_control_data[6] > 0.0):
+            self._is_gripper_open = True
+        else:
+            self._is_gripper_open = False
+
+        # Transmit UART message to gripper controller only if the state has changed
+        if self._is_gripper_open != self._prev_is_gripper_open:
+            try:
+                gripper_value = 255 if self._is_gripper_open else 46
+                self._mc.set_gripper_value(gripper_value, 80)
+                self._prev_is_gripper_open =  self._is_gripper_open
+            except Exception as gripper_err:
+                self.get_logger().error(f"Error setting gripper value: {str(gripper_err)}")
+
 
 def main(args=None):
     rclpy.init(args=args)

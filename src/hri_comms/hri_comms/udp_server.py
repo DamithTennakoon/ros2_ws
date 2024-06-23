@@ -14,7 +14,7 @@ class UdpServer(Node):
         self._tx_data = "ROS server"
         self._buffer_size = 1024
         self._server_port = 2222
-        self._server_ip = '130.63.228.232'
+        self._server_ip = '130.63.229.148'
         self._client_ip = []
 
         # Initialize UDP server
