@@ -56,8 +56,8 @@ class KeyEECtrl(Node):
         self._input_key = "NONE" # Received string message of the keyboard input
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
         self._incr_pos = 1.0 # Position increment for EE
-        self._command_delay = 0.02 # Delay after transmitting motion command
-        self._move_speed = 50 # Arm movement speed in mm/s
+        self._command_delay = 0.03 # Delay after transmitting motion command
+        self._move_speed = 30 # Arm movement speed in mm/s
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
