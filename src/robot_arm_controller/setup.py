@@ -21,7 +21,8 @@ setup(
     entry_points={
         'console_scripts': [
             "keyboard_coord_controller = robot_arm_controller.keyboard_coord_controller:main",
-            "hand_coord_controller = robot_arm_controller.hand_coord_controller:main"
+            "hand_coord_controller = robot_arm_controller.hand_coord_controller:main",
+            "variable_gripper_controller = robot_arm_controller.variable_gripper_controller:main"
         ],
     },
 )

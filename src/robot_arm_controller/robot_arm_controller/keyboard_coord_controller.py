@@ -18,10 +18,10 @@ class KeyboardCoordController(Node):
         self._mc = MyCobot("/dev/ttyACM0", 115200)
         self._mc.set_color(255, 255, 255)
         time.sleep(1)
-        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 12) # Init angles
-        time.sleep(5)
-        self._mc.send_coords([93.2, -138.2, 200.9, 180, 7, 95.12], 12, 1)
-        time.sleep(5)
+        #self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 12) # Init angles
+        #time.sleep(5)
+        self._mc.send_coords([93, -120, 280, 180, 7, 95], 12, 1)
+        time.sleep(8)
         # Initialize gripper motion type
         #self._mc.set_gripper_mode(0)
 
@@ -35,7 +35,7 @@ class KeyboardCoordController(Node):
         self.raw_data_subscriber = self.create_subscription(String, 'raw_input_data', self.store_raw_data, 10)
 
         # Define a callback function to move robot arm
-        self._move_robot_timer = self.create_timer(0.005, self.move_robot_arm)
+        self._move_robot_timer = self.create_timer(0.001, self.move_robot_arm) # DEFAULT: 0.005
 
         # Define a callback function to retrive the joint angles
         self._retrieve_joint_angles = self.create_timer(0.01, self.retrieve_joint_angles)
@@ -54,7 +54,7 @@ class KeyboardCoordController(Node):
         self._prev_is_gripper_open = self._is_gripper_open 
 
         # Define float object to store move value
-        self._incr_pos = 1.3 # DEF -> 0.5 -> 1
+        self._incr_pos = 2.0 # DEF -> 0.5 -> 1 -> 1.3 ->LAST CHANGE 0.8
 
         # Define float object to store joint 0 angle
         self._joint_0_angle = self._cur_position[0]
@@ -93,12 +93,12 @@ class KeyboardCoordController(Node):
         self._cur_position[5] = self._joint_0_angle - 5
 
         # Trasnmit UART message to robot arm
-        self._mc.send_coords(self._cur_position, 60, 1)
+        self._mc.send_coords(self._cur_position, 30, 1) # Speed 90
         
         # Transmit UART message to gripper controller only if the state has changed
         if self._is_gripper_open != self._prev_is_gripper_open:
             try:
-                gripper_value = 255 if self._is_gripper_open else 46
+                gripper_value = 50 if self._is_gripper_open else 29
                 self._mc.set_gripper_value(gripper_value, 80)
                 self._prev_is_gripper_open =  self._is_gripper_open
             except Exception as gripper_err:

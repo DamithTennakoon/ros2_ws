@@ -19,9 +19,9 @@ class HandCoordController(Node):
         self._mc = MyCobot("/dev/ttyACM0", 115200)
         self._mc.set_color(255, 255, 255)
         time.sleep(1)
-        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 12) # Init angles
+        #self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 12) # Init angles
         time.sleep(5)
-        self._mc.send_coords([93.2, -138.2, 200.9, 180, 7, 95.12], 12, 1)
+        self._mc.send_coords([93, -120, 280, 180, 7, 95], 12, 1)
         time.sleep(5)
 
         # Construct a publisher object to publish the received data to the topic "raw_input_data"
@@ -46,7 +46,7 @@ class HandCoordController(Node):
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
 
         # Define float object to store move value
-        self._incr_pos = 0.5
+        self._incr_pos = 0.3
 
         # Define integer to store the PWM gripper positional value (0-255)
         self._is_gripper_open = True # Initialize on open state
@@ -117,7 +117,7 @@ class HandCoordController(Node):
         # Transmit UART message to gripper controller only if the state has changed
         if self._is_gripper_open != self._prev_is_gripper_open:
             try:
-                gripper_value = 255 if self._is_gripper_open else 46
+                gripper_value = 50 if self._is_gripper_open else 29
                 self._mc.set_gripper_value(gripper_value, 80)
                 self._prev_is_gripper_open =  self._is_gripper_open
             except Exception as gripper_err:
