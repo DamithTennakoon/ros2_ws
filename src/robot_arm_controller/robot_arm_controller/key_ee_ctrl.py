@@ -60,7 +60,7 @@ class KeyEECtrl(Node):
         self._move_speed = 30 # Arm movement speed in mm/s
 
         # Create/execute callback functions
-        self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
+        self._move_robot_timer = self.create_timer(0.015, self.move_robot_arm)
 
 
     # Event Handler method - store the raw User Input Segment's keyboard data, locally
