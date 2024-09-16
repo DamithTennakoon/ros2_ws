@@ -4,9 +4,8 @@
 # Written by: Damith Tennakoon
 
 # NOTES:
-# - Branched off the "keyboard_coord_controller" node
-# - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
-# - Does not perform gripper control within this node
+# - This branch debugs the current pose data of the robot arm with keyboard input.
+# - Search "[pose_debug]" to see changes from the master branch.
 
 # Import ROS2 libraries
 import rclpy
@@ -93,7 +92,12 @@ class KeyEECtrl(Node):
         elif (self._input_key == "M"):
             self._cur_position[2] -= self._incr_pos
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
-            time.sleep(self._command_delay) 
+            time.sleep(self._command_delay)
+        # [pose_debug] - output the current pose of the robot arm
+        elif (self._input_key == "Q"):
+            current_pose = self._mc.get_coords()
+            self.get_logger().info(f"ROBOT'S CURRENT POSE: {current_pose}")
+            time.sleep(self._command_delay)
         else:
             self._cur_position = self._cur_position
 
