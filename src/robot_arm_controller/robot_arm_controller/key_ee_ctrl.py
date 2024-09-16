@@ -4,7 +4,7 @@
 # Written by: Damith Tennakoon
 
 # NOTES:
-# - This branch debugs the current pose data of the robot arm with keyboard input.
+# - This branch debugs the commanded and current pose data of the robot arm with keyboard input.
 # - Search "[pose_debug]" to see changes from the master branch.
 
 # Import ROS2 libraries
@@ -93,9 +93,10 @@ class KeyEECtrl(Node):
             self._cur_position[2] -= self._incr_pos
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay)
-        # [pose_debug] - output the current pose of the robot arm
+        # [pose_debug] - output the commanded and current pose of the robot arm
         elif (self._input_key == "Q"):
             current_pose = self._mc.get_coords()
+            self.get_logger().info(f"COMMANDED POSE: {self._cur_position}")
             self.get_logger().info(f"ROBOT'S CURRENT POSE: {current_pose}")
             time.sleep(self._command_delay)
         else:
