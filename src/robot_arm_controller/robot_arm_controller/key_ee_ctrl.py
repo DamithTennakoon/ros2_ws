@@ -50,6 +50,7 @@ class KeyEECtrl(Node):
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
         time.sleep(10)
         self.get_logger().info("INITIALIZING ADAPTIVE GRIPPER")
+        self._mc.set_gripper_mode(0) # RE - Transparent transmmission mode
         self._mc.set_gripper_state(0, 50) # Move the gripper to full-open position
         time.sleep(5)
         self._mc.set_gripper_state(1, 50) # Move the gripper to full-close position
