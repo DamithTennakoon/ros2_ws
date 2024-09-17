@@ -4,9 +4,10 @@
 # Written by: Damith Tennakoon
 
 # NOTES:
-# - Branched off the "keyboard_coord_controller" node
+# - Branched off the "keyboard_coord_controller.py" ROS2 node
 # - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
-# - Does not perform gripper control within this node
+# - **Does not perform gripper control within this node
+# - Currently cannot output whether the gripper is connected or not to the Atom I/O system
 
 # Import ROS2 libraries
 import rclpy
@@ -29,13 +30,18 @@ class KeyEECtrl(Node):
         super().__init__("key_ee_ctrl")
         self.get_logger().info("INITIALIZING KEY END EFFECTOR CONTROLLER NODE")
 
-        # Initialize connection to robot arm
+        # Initialize connection to robot arm computer
         self.get_logger().info("INITIALIZING CONNECTION TO ROBOT ARM") 
         self._mc = MyCobot("/dev/ttyACM0", 115200) # Instance of the MyCobot class
         time.sleep(1) 
-        self.get_logger().info("CONNECTION ESTABLISHED")
+        self.get_logger().info("CONNECTION WITH ROBOT ARM COMPUTER ESTABLISHED")
 
-        # Initialize robot arm movements
+        # Initialize connection to gripper computer and transmission mode
+        self._mc.init_gripper() # Initialization
+        self._mc.set_gripper_state(0) # Transparent transmmission mode
+        self.get_logger().info("GRIPPER TRANSMISSION MODE SET")
+
+        # Initialize robot arm + gripper movements
         self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
         self._mc.set_color(255, 0, 0)
         time.sleep(0.5)
@@ -43,9 +49,15 @@ class KeyEECtrl(Node):
         time.sleep(10)
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
         time.sleep(10)
+        self._mc.set_gripper_value(0, 50, 1) # Move the gripper to full-close position
+        time.sleep(3)
+        self._mc.set_gripper_value(100, 50, 1) # Move the gripper to full-open position
+        time.sleep(3)
+        self._mc.set_gripper_value(50, 50, 1) # Move the gripper to functional position
+        time.sleep(3)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
-        self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
+        self.get_logger().info("ROBOT ARM INITIALIZATION COMPLETE - STATUS [READY]")
 
         # Create Publisher/Subscriber objects
         self._publish_robot_pose = self.create_publisher(Float64MultiArray, 'robot_pose', 10) # Transmit the robot's pose for tracking/plotting 

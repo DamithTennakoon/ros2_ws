@@ -1,0 +1,45 @@
+[11.547s] Invoking command in '/home/rpi/ros2_ws/src/my_robot_controller': PYTHONPATH=/home/rpi/ros2_ws/build/my_robot_controller/prefix_override:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/my_robot_controller build --build-base /home/rpi/ros2_ws/build/my_robot_controller/build install --record /home/rpi/ros2_ws/build/my_robot_controller/install.log --single-version-externally-managed
+[13.607s] running egg_info
+[13.612s] creating ../../build/my_robot_controller/my_robot_controller.egg-info
+[13.614s] writing ../../build/my_robot_controller/my_robot_controller.egg-info/PKG-INFO
+[13.618s] writing dependency_links to ../../build/my_robot_controller/my_robot_controller.egg-info/dependency_links.txt
+[13.622s] writing entry points to ../../build/my_robot_controller/my_robot_controller.egg-info/entry_points.txt
+[13.625s] writing requirements to ../../build/my_robot_controller/my_robot_controller.egg-info/requires.txt
+[13.627s] writing top-level names to ../../build/my_robot_controller/my_robot_controller.egg-info/top_level.txt
+[13.629s] writing manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'
+[13.644s] reading manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'
+[13.651s] writing manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'
+[13.654s] running build
+[13.655s] running build_py
+[13.657s] creating /home/rpi/ros2_ws/build/my_robot_controller/build
+[13.661s] creating /home/rpi/ros2_ws/build/my_robot_controller/build/lib
+[13.663s] creating /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[13.668s] copying my_robot_controller/__init__.py -> /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[13.673s] copying my_robot_controller/draw_circle.py -> /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[13.677s] copying my_robot_controller/my_first_node.py -> /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[13.679s] copying my_robot_controller/pose_subscriber.py -> /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller
+[13.683s] running install
+[13.685s] running install_lib
+[13.695s] creating /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[13.711s] copying /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/__init__.py -> /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[13.712s] copying /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/draw_circle.py -> /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[13.713s] copying /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/my_first_node.py -> /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[13.714s] copying /home/rpi/ros2_ws/build/my_robot_controller/build/lib/my_robot_controller/pose_subscriber.py -> /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller
+[13.717s] byte-compiling /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/__init__.py to __init__.cpython-310.pyc
+[13.730s] byte-compiling /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/draw_circle.py to draw_circle.cpython-310.pyc
+[13.731s] byte-compiling /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/my_first_node.py to my_first_node.cpython-310.pyc
+[13.732s] byte-compiling /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller/pose_subscriber.py to pose_subscriber.cpython-310.pyc
+[13.733s] running install_data
+[13.735s] creating /home/rpi/ros2_ws/install/my_robot_controller/share/ament_index
+[13.735s] creating /home/rpi/ros2_ws/install/my_robot_controller/share/ament_index/resource_index
+[13.736s] creating /home/rpi/ros2_ws/install/my_robot_controller/share/ament_index/resource_index/packages
+[13.737s] copying resource/my_robot_controller -> /home/rpi/ros2_ws/install/my_robot_controller/share/ament_index/resource_index/packages
+[13.738s] copying package.xml -> /home/rpi/ros2_ws/install/my_robot_controller/share/my_robot_controller
+[13.739s] running install_egg_info
+[13.746s] Copying ../../build/my_robot_controller/my_robot_controller.egg-info to /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller-0.0.0-py3.10.egg-info
+[13.765s] running install_scripts
+[13.902s] Installing draw_circle script to /home/rpi/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[13.904s] Installing pose_subscriber script to /home/rpi/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[13.907s] Installing test_node script to /home/rpi/ros2_ws/install/my_robot_controller/lib/my_robot_controller
+[13.911s] writing list of installed files to '/home/rpi/ros2_ws/build/my_robot_controller/install.log'
+[14.229s] Invoked command in '/home/rpi/ros2_ws/src/my_robot_controller' returned '0': PYTHONPATH=/home/rpi/ros2_ws/build/my_robot_controller/prefix_override:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../../build/my_robot_controller build --build-base /home/rpi/ros2_ws/build/my_robot_controller/build install --record /home/rpi/ros2_ws/build/my_robot_controller/install.log --single-version-externally-managed
