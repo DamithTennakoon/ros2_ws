@@ -8,6 +8,7 @@
 # - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
 # - **Does not perform gripper control within this node
 # - Currently cannot output whether the gripper is connected or not to the Atom I/O system
+# - Gripper instructions- 100 = closed-state, 0= open-state
 
 # Import ROS2 libraries
 import rclpy
@@ -38,7 +39,7 @@ class KeyEECtrl(Node):
 
         # Initialize connection to gripper computer and transmission mode
         self._mc.init_gripper() # Initialization
-        self._mc.set_gripper_mode(0) # Transparent transmmission mode
+        self._mc.set_gripper_mode(0) # Transparent Transmmission mode
         self.get_logger().info("GRIPPER TRANSMISSION MODE SET")
 
         # Initialize robot arm + gripper movements
@@ -50,7 +51,7 @@ class KeyEECtrl(Node):
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
         time.sleep(10)
         self.get_logger().info("INITIALIZING ADAPTIVE GRIPPER")
-        self._mc.set_gripper_mode(0) # RE - Transparent transmmission mode
+        self._mc.set_gripper_mode(0) # Resend the mode - Transparent Transmmission mode
         self._mc.set_gripper_state(0, 50) # Move the gripper to full-open position
         time.sleep(5)
         self._mc.set_gripper_state(1, 50) # Move the gripper to full-close position
@@ -72,6 +73,9 @@ class KeyEECtrl(Node):
         self._incr_pos = 1.0 # Position increment for EE
         self._command_delay = 0.02 # Delay after transmitting motion command
         self._move_speed = 50 # Arm movement speed in mm/s
+        self._gripper_open_val = 50 # Gripper open value from 0~100
+        self._gripper_close_val = 20 # Gripper open value from 0~100
+        self._gripper_speed = 50 # Gripper movement speed in mm/s
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -108,6 +112,14 @@ class KeyEECtrl(Node):
             self._cur_position[2] -= self._incr_pos
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
+        elif (self._input_key == "Q"):
+            self._mc.set_gripper_mode(0) # Resend the mode - Transparent Transmmission mode
+            self._mc.set_gripper_value(self._gripper_open_val, self._gripper_speed, 1) # Open the gripper
+            time.sleep(self._command_delay)
+        elif (self._input_key == "W"):
+            self._mc.set_gripper_mode(0)
+            self._mc.set_gripper_value(self._gripper_close_val, self._gripper_speed, 1) # Close the gripper
+            time.sleep(self._command_delay)
         else:
             self._cur_position = self._cur_position
 
