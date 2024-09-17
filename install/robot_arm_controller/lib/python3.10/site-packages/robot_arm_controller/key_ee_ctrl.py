@@ -38,7 +38,7 @@ class KeyEECtrl(Node):
 
         # Initialize connection to gripper computer and transmission mode
         self._mc.init_gripper() # Initialization
-        self._mc.set_gripper_state(0) # Transparent transmmission mode
+        self._mc.set_gripper_mode(0) # Transparent transmmission mode
         self.get_logger().info("GRIPPER TRANSMISSION MODE SET")
 
         # Initialize robot arm + gripper movements
