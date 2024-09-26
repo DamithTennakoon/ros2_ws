@@ -3,6 +3,10 @@
 # Objective: Parse through input hand tracking data from Unity and utilize it to move robot arm in coorinate control mode.
 # Written by: Damith Tennakoon
 
+# NOTES:
+# - Branched off the "hand_coord_controller.py" ROS2 node
+# - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
+
 # Import ROS2 libraries
 import rclpy
 from rclpy.node import Node 
@@ -42,11 +46,36 @@ class HandTrackingEECtrl(Node):
         time.sleep(0.5)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
-
         # Create Publisher/Subscriber objects
         self._publish_robot_pose = self.create_publisher(Float64MultiArray, 'robot_pose', 10) # Transmit the robot's pose for tracking/plotting 
         self._publish_robot_joint_angles = self.create_publisher(Float64MultiArray, 'robot_joint_angles', 10) # Transmit the robot's joints for 3D digital twin
         self.raw_data_subscriber = self.create_subscription(String, 'raw_input_data', self.parse_raw_data, 10) # Receive the string data from User Input Segment
+
+        # Define variables for local data storage 
+        self._hand_control_data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Floating point list of hand control data
+        self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
+        self._incr_pos = 1.0 # Position increment for EE
+        self._command_delay = 0.02 # Delay after transmitting motion command
+        self._move_speed = 50 # Arm movement speed in mm/s
+        #self._rx_string = "NONE" # Recieved data string from topic
+
+    
+    # Event Handler method - parse and store the HTC received data
+    def parse_raw_data(self, msg):
+        # Parse data if the received message is for HTC
+        if (msg.data[:3] == "HTC"):
+            #self._rx_string = msg.data # Store the received string 
+            split_string_list = msg.data.splt(',') # Seperate the string using csv format
+
+            # Convert and store the data 
+            for i in range(len(self._hand_control_data)):
+                self._hand_control_data[i] = float(split_string_list[i+1]) 
+        else:
+            for i in range(len(self._hand_control_data)):
+                self._hand_control_data[i] = 0.0 # Zero the data
+        
+        # TEMP: Log the output data for testing comms
+        self.get_logger().info(self._hand_control_data)
 
 # Create main method for looping the ROS node
 def main(args=None):
