@@ -4,9 +4,7 @@
 # Written by: Damith Tennakoon
 
 # NOTES:
-# - Branched off the "keyboard_coord_controller" node
-# - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
-# - Does not perform gripper control within this node
+# - This branch on git is an edit of the key_ee_ctrl.py script to log the angles of joint - 0 and joint 6 for alignment testing.
 
 # Import ROS2 libraries
 import rclpy
@@ -94,6 +92,14 @@ class KeyEECtrl(Node):
             self._cur_position[2] -= self._incr_pos
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
+        # [joint_alignment] - output the angle of joint 0 and the orietnation of the end effector 
+        elif (self._input_key == "Q"):
+            current_pose = self._mc.get_coords()
+            time.sleep(0.1)
+            current_joint_angles = self._mc.get_angles()
+            time.sleep(0.1)
+            self.get_logger().info(f"      JOINT 0 ANGLE: {current_joint_angles[0]}")
+            self.get_logger().info(f"CURRENT ORIENTATION: {current_pose[3:]}")
         else:
             self._cur_position = self._cur_position
 
