@@ -75,7 +75,7 @@ class HandTrackingEECtrl(Node):
                 self._hand_control_data[i] = 0.0 # Zero the data
         
         # TEMP: Log the output data for testing comms
-        self.get_logger().info(self._hand_control_data)
+        self.get_logger().info(f"{self._hand_control_data}")
 
 # Create main method for looping the ROS node
 def main(args=None):
