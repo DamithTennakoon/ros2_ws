@@ -65,7 +65,7 @@ class HandTrackingEECtrl(Node):
         # Parse data if the received message is for HTC
         if (msg.data[:3] == "HTC"):
             #self._rx_string = msg.data # Store the received string 
-            split_string_list = msg.data.splt(',') # Seperate the string using csv format
+            split_string_list = msg.data.split(',') # Seperate the string using csv format
 
             # Convert and store the data 
             for i in range(len(self._hand_control_data)):
