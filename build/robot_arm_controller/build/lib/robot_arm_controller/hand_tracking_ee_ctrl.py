@@ -61,6 +61,8 @@ class HandTrackingEECtrl(Node):
         self._command_delay = 0.02 # Delay after transmitting motion command
         self._move_speed = 50 # Arm movement speed in mm/s
 
+        # Create and excute callback functions
+        self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
     
     # Event Handler method - parse and store the HTC received data
     def parse_raw_data(self, msg):
@@ -77,16 +79,16 @@ class HandTrackingEECtrl(Node):
         self.get_logger().info(f"{self._hand_control_data}")
 
     # Callback method - move end effector of robot arm using cartesian coordinate control function
-        def move_robot_arm(self):
-            # Update position vector when hand control data is non-zero
-            if ((math.sqrt(self._hand_control_data[0]**2 + self._hand_control_data[1]**2 + self._hand_control_data[2]**2)) > 0.0):
-                self._cur_position[0] += -1*(self._hand_control_data[0] * self._incr_pos) # Move right/left in the robot's adjusted coord frame
-                self._cur_position[1] += -1*(self._hand_control_data[2] * self._incr_pos) # Move forward/backward in the robot's adjusted coord frame
-                self._cur_position[2] += 1*(self._hand_control_data[1] * self._incr_pos) # Move up/down in the robot's adjusted coord frame
-                self._mc.send_coords(self._cur_position, self._move_speed, 1) # Transmit coordinate control command
-                time.sleep(self._command_delay) # Delay to move arm to position
-            else:
-                self._cur_position = self._cur_position
+    def move_robot_arm(self):
+        # Update position vector when hand control data is non-zero
+        if ((math.sqrt(self._hand_control_data[0]**2 + self._hand_control_data[1]**2 + self._hand_control_data[2]**2)) > 0.0):
+            self._cur_position[0] += -1*(self._hand_control_data[0] * self._incr_pos) # Move right/left in the robot's adjusted coord frame
+            self._cur_position[1] += -1*(self._hand_control_data[2] * self._incr_pos) # Move forward/backward in the robot's adjusted coord frame
+            self._cur_position[2] += 1*(self._hand_control_data[1] * self._incr_pos) # Move up/down in the robot's adjusted coord frame
+            self._mc.send_coords(self._cur_position, self._move_speed, 1) # Transmit coordinate control command
+            time.sleep(self._command_delay) # Delay to move arm to position
+        else:
+            self._cur_position = self._cur_position
 
 
 # Create main method for looping the ROS node
