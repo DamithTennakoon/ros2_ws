@@ -29,7 +29,7 @@ def compute_joint_alignment(self):
     self._cur_position[5] = math.degrees(math.atan(math.radians(self._cur_position[1])/math.radians(self._cur_position[0]))) + self._cur_position[5]
 
 def compute_joint_alignment_angle(current_pose):
-    theta = math.degrees(math.atan((current_pose[0])/(-1*current_pose[1])))
+    theta = float(math.degrees(math.atan((current_pose[0])/(-1*current_pose[1]))))
     return theta
 
 # Construct Class
