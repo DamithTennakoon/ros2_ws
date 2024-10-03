@@ -70,6 +70,7 @@ class KeyEECtrl(Node):
         self._incr_pos = 1.0 # Position increment for EE
         self._command_delay = 0.02 # Delay after transmitting motion command
         self._move_speed = 50 # Arm movement speed in mm/s
+        self._offset_angle = 90 # Offset angle, for joint alignment, in degrees
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -84,33 +85,32 @@ class KeyEECtrl(Node):
         # Update position vector based on input key data
         if (self._input_key == "UpArrow"):
             self._cur_position[0] += self._incr_pos # Increment on x-axis
-            #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position) # Compute and correct rz rotation 
-            self.get_logger().info(f"THETA DTYPE {type(compute_joint_alignment_angle(self._cur_position))} REQUIRE TYPE: {type(self._cur_position[5])}")
+            self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) # Compute and correct rz rotation 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
         elif (self._input_key == "DownArrow"):
             self._cur_position[0] -= self._incr_pos
-            #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
+            self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "RightArrow"):
             self._cur_position[1] -= self._incr_pos
-            #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
+            self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "LeftArrow"):
             self._cur_position[1] += self._incr_pos
-            #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
+            self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "N"):
             self._cur_position[2] += self._incr_pos
-            #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
+            self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "M"):
             self._cur_position[2] -= self._incr_pos
-            #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
+            self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         # [joint_alignment] - output the angle of joint 0 and the orietnation of the end effector 
@@ -125,7 +125,6 @@ class KeyEECtrl(Node):
             self._cur_position = self._cur_position
     
     
-
 
 # Create main method for looping the ROS node
 def main(args=None):
