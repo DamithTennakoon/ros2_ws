@@ -85,25 +85,22 @@ class KeyEECtrl(Node):
         if (self._input_key == "UpArrow"):
             self._cur_position[0] += self._incr_pos # Increment on x-axis
             #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position) # Compute and correct rz rotation 
-            self.get_logger().info(f"THETA {compute_joint_alignment_angle(self._cur_position)}")
+            self.get_logger().info(f"THETA DTYPE {type(compute_joint_alignment_angle(self._cur_position))} REQUIRE TYPE: {type(self._cur_position[5])}")
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
         elif (self._input_key == "DownArrow"):
             self._cur_position[0] -= self._incr_pos
             #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
-            self.get_logger().info(f"THETA {compute_joint_alignment_angle(self._cur_position)}")
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "RightArrow"):
             self._cur_position[1] -= self._incr_pos
             #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
-            self.get_logger().info(f"THETA {compute_joint_alignment_angle(self._cur_position)}")
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "LeftArrow"):
             self._cur_position[1] += self._incr_pos
             #self._cur_position[5] += compute_joint_alignment_angle(self._cur_position)
-            self.get_logger().info(f"THETA {compute_joint_alignment_angle(self._cur_position)}")
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "N"):
