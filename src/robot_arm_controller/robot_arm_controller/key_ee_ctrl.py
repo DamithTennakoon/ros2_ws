@@ -83,7 +83,7 @@ class KeyEECtrl(Node):
     # Callback method - move end effector of robot arm using cartesian coordinate control fuction
     def move_robot_arm(self):
         base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-        time.sleep(0.01) 
+        #time.sleep(0.01) 
 
         # Update position vector based on input key data
         if (self._input_key == "UpArrow"):
