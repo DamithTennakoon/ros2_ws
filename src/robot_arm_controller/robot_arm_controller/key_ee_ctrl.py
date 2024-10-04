@@ -82,37 +82,32 @@ class KeyEECtrl(Node):
 
     # Callback method - move end effector of robot arm using cartesian coordinate control fuction
     def move_robot_arm(self):
+        base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
+        time.sleep(0.01) 
+
         # Update position vector based on input key data
         if (self._input_key == "UpArrow"):
             self._cur_position[0] += self._incr_pos # Increment on x-axis
+            self._cur_position[5] = base_joint_angle # Set the base joint angle to the rz rotation angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) # Compute and correct rz rotation 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
-            self._cur_position[5] = self._mc.get_angles()[0] # Align the yaw rotation angle (rz) with the base joint
-            self._mc.send_coords(self._cur_position, self._move_speed, 1) 
-            time.sleep(self._command_delay)
         elif (self._input_key == "DownArrow"):
             self._cur_position[0] -= self._incr_pos
+            self._cur_position[5] = base_joint_angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
-            self._cur_position[5] = self._mc.get_angles()[0] 
-            self._mc.send_coords(self._cur_position, self._move_speed, 1) 
-            time.sleep(self._command_delay)
         elif (self._input_key == "RightArrow"):
             self._cur_position[1] -= self._incr_pos
+            self._cur_position[5] = base_joint_angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
-            self._mc.send_coords(self._cur_position, self._move_speed, 1) 
-            time.sleep(self._command_delay)
-            self._cur_position[5] = self._mc.get_angles()[0] 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay)
         elif (self._input_key == "LeftArrow"):
             self._cur_position[1] += self._incr_pos
+            self._cur_position[5] = base_joint_angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
-            self._mc.send_coords(self._cur_position, self._move_speed, 1) 
-            time.sleep(self._command_delay)
-            self._cur_position[5] = self._mc.get_angles()[0] 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay)
         elif (self._input_key == "N"):
