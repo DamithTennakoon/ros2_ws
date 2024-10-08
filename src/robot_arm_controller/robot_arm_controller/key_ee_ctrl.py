@@ -88,7 +88,7 @@ class KeyEECtrl(Node):
         # Update position vector based on input key data
         if (self._input_key == "UpArrow"):
             base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(0.01)
+            time.sleep(self._command_delay)
             self._cur_position[0] += self._incr_pos # Increment on x-axis
             self._cur_position[5] = base_joint_angle # Set the base joint angle to the rz rotation angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) # Compute and correct rz rotation 
@@ -96,7 +96,7 @@ class KeyEECtrl(Node):
             time.sleep(self._command_delay) # Delay to move arm to position
         elif (self._input_key == "DownArrow"):
             base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(0.01)
+            time.sleep(self._command_delay)
             self._cur_position[0] -= self._incr_pos
             self._cur_position[5] = base_joint_angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
@@ -104,7 +104,7 @@ class KeyEECtrl(Node):
             time.sleep(self._command_delay) 
         elif (self._input_key == "RightArrow"):
             base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(0.01)
+            time.sleep(self._command_delay)
             self._cur_position[1] -= self._incr_pos
             self._cur_position[5] = base_joint_angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
@@ -112,7 +112,7 @@ class KeyEECtrl(Node):
             time.sleep(self._command_delay)
         elif (self._input_key == "LeftArrow"):
             base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(0.01)
+            time.sleep(self._command_delay)
             self._cur_position[1] += self._incr_pos
             self._cur_position[5] = base_joint_angle
             #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
