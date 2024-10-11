@@ -24,6 +24,7 @@ import time
 
 # Import computational libraries
 import math
+import numpy as np
 
 # Define functions
 # Function - compute the offset angle required to track the joint 0 direction of motion - remove the self functions
@@ -33,6 +34,16 @@ def compute_joint_alignment(self):
 def compute_joint_alignment_angle(current_pose):
     theta = float(math.degrees(math.atan((current_pose[0])/(-1*current_pose[1]))))
     return theta
+
+# Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
+def yaw_axis_alignment(current_pose, offset):
+    p1_x = current_pose[0] # Parse the x,y coordinates
+    p1_y = current_pose[1]
+    beta = math.atan(-1*p1_x/p1_y) # Compute the immediate angle, radians
+    p2_x = p1_x - offset * math.cos(beta) # Compute the x-component due to the offset
+    p2_y = p1_y - offset * math.sin(beta) # Compute the y-component due to the offset
+    yaw_angle_degrees = math.degrees(math.atan(-p2_x/p2_y)) + 90.0 # Compute actual immediate angle and account for offset angle, degrees
+    return yaw_angle_degrees
 
 # Construct Class
 class KeyEECtrl(Node):
@@ -71,6 +82,7 @@ class KeyEECtrl(Node):
         self._command_delay = 0.02 # Delay after transmitting motion command
         self._move_speed = 50 # Arm movement speed in mm/s
         self._offset_angle = 90 # Offset angle, for joint alignment, in degrees
+        self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -82,50 +94,34 @@ class KeyEECtrl(Node):
 
     # Callback method - move end effector of robot arm using cartesian coordinate control fuction
     def move_robot_arm(self):
-        #base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-        #time.sleep(0.01) 
 
         # Update position vector based on input key data
-        if (self._input_key == "UpArrow"):
-            base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(self._command_delay)
+        if (self._input_key == "UpArrow"):    
             self._cur_position[0] += self._incr_pos # Increment on x-axis
-            self._cur_position[5] = base_joint_angle # Set the base joint angle to the rz rotation angle
-            #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) # Compute and correct rz rotation 
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
         elif (self._input_key == "DownArrow"):
-            base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(self._command_delay)
             self._cur_position[0] -= self._incr_pos
-            self._cur_position[5] = base_joint_angle
-            #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "RightArrow"):
-            base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(self._command_delay)
             self._cur_position[1] -= self._incr_pos
-            self._cur_position[5] = base_joint_angle
-            #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay)
         elif (self._input_key == "LeftArrow"):
-            base_joint_angle = self._mc.get_angles()[0] # Retrieve the current base joint angle
-            time.sleep(self._command_delay)
             self._cur_position[1] += self._incr_pos
-            self._cur_position[5] = base_joint_angle
-            #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay)
         elif (self._input_key == "N"):
             self._cur_position[2] += self._incr_pos
-            #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "M"):
             self._cur_position[2] -= self._incr_pos
-            #self._cur_position[5] = self._offset_angle + compute_joint_alignment_angle(self._cur_position) 
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         # [joint_alignment] - output the angle of joint 0 and the orietnation of the end effector 
@@ -138,7 +134,8 @@ class KeyEECtrl(Node):
             self.get_logger().info(f"CURRENT ORIENTATION: {current_pose[3:]}")
         else:
             self._cur_position = self._cur_position
-    
+
+            
     
 
 # Create main method for looping the ROS node
