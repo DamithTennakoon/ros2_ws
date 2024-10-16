@@ -5,7 +5,7 @@
 
 # NOTES:
 # - Branched off the "hand_coord_controller.py" ROS2 node
-# - **Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
+# - Does not perform gripper control within this node
 
 # Import ROS2 libraries
 import rclpy
@@ -79,7 +79,7 @@ class HandTrackingEECtrl(Node):
             [-1, 0, 0],
             [0, 0, -1],
             [0, 1, 0]
-        ]) # Transfomration matrix from Unity coordainte system to Robot coordinate system
+        ]) # Transformation matrix from Unity coordinate system to Robot coordinate system
 
         # Create and excute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -95,8 +95,6 @@ class HandTrackingEECtrl(Node):
         else:
             for i in range(len(self._hand_control_data)):
                 self._hand_control_data[i] = 0.0 # Zero the data
-        # TEMP: Log the output data for testing comms
-        self.get_logger().info(f"{self._hand_control_data}")
 
     # Callback method - move end effector of robot arm using cartesian coordinate control function
     def move_robot_arm(self):
@@ -104,9 +102,6 @@ class HandTrackingEECtrl(Node):
         if ((math.sqrt(self._hand_control_data[0]**2 + self._hand_control_data[1]**2 + self._hand_control_data[2]**2)) > 0.0):
             unity_coords = np.array([self._hand_control_data[0], self._hand_control_data[1], self._hand_control_data[2]]) # Construct numpy array of unity unit vector
             robot_coords = np.dot(self._t_unity_to_robot, unity_coords) # Perform coordinate transformation - unity frame to robot frame
-            #self._cur_position[0] += -1*(self._hand_control_data[0] * self._incr_pos) # Move right/left in the robot's adjusted coord frame
-            #self._cur_position[1] += -1*(self._hand_control_data[2] * self._incr_pos) # Move forward/backward in the robot's adjusted coord frame
-            #self._cur_position[2] += 1*(self._hand_control_data[1] * self._incr_pos) # Move up/down in the robot's adjusted coord frame
             self._cur_position[0] += robot_coords[0] # Move robot along its x-axis
             self._cur_position[1] += robot_coords[1] # Move robot along its y-axis
             self._cur_position[2] += robot_coords[2] # Move robot along its z-axis

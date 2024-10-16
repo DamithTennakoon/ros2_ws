@@ -5,7 +5,6 @@
 
 # NOTES:
 # - Branched off the "keyboard_coord_controller" node
-# - **Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
 # - Does not perform gripper control within this node
 
 # Import ROS2 libraries
