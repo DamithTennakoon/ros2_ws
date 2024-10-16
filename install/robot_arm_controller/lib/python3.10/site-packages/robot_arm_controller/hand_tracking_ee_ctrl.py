@@ -5,7 +5,7 @@
 
 # NOTES:
 # - Branched off the "hand_coord_controller.py" ROS2 node
-# - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
+# - **Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
 
 # Import ROS2 libraries
 import rclpy
