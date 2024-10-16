@@ -72,6 +72,7 @@ class KeyEECtrl(Node):
         self._incr_pos = 1.0 # Position increment for EE
         self._command_delay = 0.02 # Delay after transmitting motion command
         self._move_speed = 50 # Arm movement speed in mm/s
+        self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
