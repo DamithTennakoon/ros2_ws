@@ -75,6 +75,11 @@ class HandTrackingEECtrl(Node):
         self._command_delay = 0.04 # Delay after transmitting motion command
         self._move_speed = 25 # Arm movement speed in mm/s
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
+        self._t_unity_to_robot = np.array([
+            [-1, 0, 0],
+            [0, 0, -1],
+            [0, 1, 0]
+        ]) # Transfomration matrix from Unity coordainte system to Robot coordinate system
 
         # Create and excute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -97,9 +102,14 @@ class HandTrackingEECtrl(Node):
     def move_robot_arm(self):
         # Update position vector when hand control data is non-zero
         if ((math.sqrt(self._hand_control_data[0]**2 + self._hand_control_data[1]**2 + self._hand_control_data[2]**2)) > 0.0):
-            self._cur_position[0] += -1*(self._hand_control_data[0] * self._incr_pos) # Move right/left in the robot's adjusted coord frame
-            self._cur_position[1] += -1*(self._hand_control_data[2] * self._incr_pos) # Move forward/backward in the robot's adjusted coord frame
-            self._cur_position[2] += 1*(self._hand_control_data[1] * self._incr_pos) # Move up/down in the robot's adjusted coord frame
+            unity_coords = np.array([self._hand_control_data[0], self._hand_control_data[1], self._hand_control_data[2]]) # Construct numpy array of unity unit vector
+            robot_coords = np.dot(self._t_unity_to_robot, unity_coords) # Perform coordinate transformation - unity frame to robot frame
+            #self._cur_position[0] += -1*(self._hand_control_data[0] * self._incr_pos) # Move right/left in the robot's adjusted coord frame
+            #self._cur_position[1] += -1*(self._hand_control_data[2] * self._incr_pos) # Move forward/backward in the robot's adjusted coord frame
+            #self._cur_position[2] += 1*(self._hand_control_data[1] * self._incr_pos) # Move up/down in the robot's adjusted coord frame
+            self._cur_position[0] += robot_coords[0] # Move robot along its x-axis
+            self._cur_position[1] += robot_coords[1] # Move robot along its y-axis
+            self._cur_position[2] += robot_coords[2] # Move robot along its z-axis
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Transmit coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
