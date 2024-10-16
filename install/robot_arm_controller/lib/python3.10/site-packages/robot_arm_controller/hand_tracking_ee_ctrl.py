@@ -24,6 +24,20 @@ import time
 # Import computational libraries
 import math
 
+# Import computational libraries
+import math
+import numpy as np
+
+# Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
+def yaw_axis_alignment(current_pose, offset):
+    p1_x = current_pose[0] # Parse the x,y coordinates
+    p1_y = current_pose[1]
+    beta = math.atan(-1*p1_x/p1_y) # Compute the immediate angle, radians
+    p2_x = p1_x - offset * math.cos(beta) # Compute the x-component due to the offset
+    p2_y = p1_y - offset * math.sin(beta) # Compute the y-component due to the offset
+    yaw_angle_degrees = math.degrees(math.atan(-p2_x/p2_y)) + 90.0 # Compute actual immediate angle and account for offset angle, degrees
+    return yaw_angle_degrees
+
 # Construct Class
 class HandTrackingEECtrl(Node):
 
@@ -58,8 +72,9 @@ class HandTrackingEECtrl(Node):
         self._hand_control_data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] # Floating point list of hand control data
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
         self._incr_pos = 1.0 # Position increment for EE
-        self._command_delay = 0.02 # Delay after transmitting motion command
-        self._move_speed = 50 # Arm movement speed in mm/s
+        self._command_delay = 0.04 # Delay after transmitting motion command
+        self._move_speed = 25 # Arm movement speed in mm/s
+        self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
 
         # Create and excute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -85,6 +100,7 @@ class HandTrackingEECtrl(Node):
             self._cur_position[0] += -1*(self._hand_control_data[0] * self._incr_pos) # Move right/left in the robot's adjusted coord frame
             self._cur_position[1] += -1*(self._hand_control_data[2] * self._incr_pos) # Move forward/backward in the robot's adjusted coord frame
             self._cur_position[2] += 1*(self._hand_control_data[1] * self._incr_pos) # Move up/down in the robot's adjusted coord frame
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Transmit coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
         else:
