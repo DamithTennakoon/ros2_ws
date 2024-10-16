@@ -5,7 +5,7 @@
 
 # NOTES:
 # - Branched off the "keyboard_coord_controller" node
-# - Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
+# - **Does not perform joint0-joint6 alignment (found issues with initialize implementation [used get_coords(), not get_angles()])
 # - Does not perform gripper control within this node
 
 # Import ROS2 libraries
@@ -21,6 +21,20 @@ from pymycobot import PI_PORT, PI_BAUD
 
 # Import signal libraries
 import time
+
+# Import computational libraries
+import math
+import numpy as np
+
+# Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
+def yaw_axis_alignment(current_pose, offset):
+    p1_x = current_pose[0] # Parse the x,y coordinates
+    p1_y = current_pose[1]
+    beta = math.atan(-1*p1_x/p1_y) # Compute the immediate angle, radians
+    p2_x = p1_x - offset * math.cos(beta) # Compute the x-component due to the offset
+    p2_y = p1_y - offset * math.sin(beta) # Compute the y-component due to the offset
+    yaw_angle_degrees = math.degrees(math.atan(-p2_x/p2_y)) + 90.0 # Compute actual immediate angle and account for offset angle, degrees
+    return yaw_angle_degrees
 
 # Construct Class
 class KeyEECtrl(Node):
@@ -72,18 +86,22 @@ class KeyEECtrl(Node):
         # Update position vector based on input key data
         if (self._input_key == "UpArrow"):
             self._cur_position[0] += self._incr_pos # Increment on x-axis
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
         elif (self._input_key == "DownArrow"):
             self._cur_position[0] -= self._incr_pos
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "RightArrow"):
             self._cur_position[1] -= self._incr_pos
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "LeftArrow"):
             self._cur_position[1] += self._incr_pos
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
         elif (self._input_key == "N"):
