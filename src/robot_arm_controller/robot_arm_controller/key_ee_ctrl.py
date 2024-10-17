@@ -45,6 +45,9 @@ class KeyEECtrl(Node):
         # Initialize connection to robot arm
         self.get_logger().info("INITIALIZING CONNECTION TO ROBOT ARM") 
         self._mc = MyCobot("/dev/ttyACM0", 115200) # Instance of the MyCobot class
+        time.sleep(1)
+        self._mc.init_gripper()
+        self._mc.set_gripper_mode(0)
         time.sleep(1) 
         self.get_logger().info("CONNECTION ESTABLISHED")
 
@@ -58,6 +61,10 @@ class KeyEECtrl(Node):
         time.sleep(10)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
+        self._mc.set_gripper_state(0, 80) # Close gripper
+        time.sleep(3)
+        self._mc.set_gripper_state(1,80) # Open Gripper
+        time.sleep(3)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
         # Create Publisher/Subscriber objects
@@ -72,6 +79,10 @@ class KeyEECtrl(Node):
         self._command_delay = 0.04 # Delay after transmitting motion command
         self._move_speed = 25 # Arm movement speed in mm/s
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
+        self._gripper_open = 100 # The maximum extension (open) value for the robot gripper
+        self._gripper_close = 20 # The close value for the robot gripper
+        self._gripper_speed = 50 # Speed of the gripper, in mm/s.
+        self._gripper_delay = 1.7 # Delay after transmitting gripper command
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -112,6 +123,12 @@ class KeyEECtrl(Node):
             self._cur_position[2] -= self._incr_pos
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
+        elif (self._input_key == "Q"):
+            self._mc.set_gripper_value(self._gripper_open, self._gripper_speed) # Open grippper command
+            time.sleep(self._gripper_delay)
+        elif (self._input_key == "W"):
+            self._mc.set_gripper_value(self._gripper_close, self._gripper_speed) # Close grippper command
+            time.sleep(self._gripper_delay)
         else:
             self._cur_position = self._cur_position
 
