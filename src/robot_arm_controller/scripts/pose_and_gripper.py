@@ -17,27 +17,29 @@ def main():
     # Initialize the robot arm connection
     mc = MyCobot("/dev/ttyACM0", 115200) # Instance of the MyCobot class
     time.sleep(1) 
-    mc.set_gripper_mode(0) # Setting gripper to 485 mode 
+    mc.init_gripper()
+    mc.set_gripper_mode(0)
     time.sleep(1)
     
     # Define state parameters
-    move_delay = 10
-    gripper_delay = 4
+    move_delay = 5
+    gripper_delay = 3
 
     # Initialize the robot arms movements
+    print("initializing")
     mc.set_color(255, 0, 0) 
     time.sleep(0.5)
+    
+    print("moving")
+    mc.set_gripper_value(100, 50) # Full-open grippper 
+    time.sleep(gripper_delay)
+    mc.send_coords([213, -120, 280, 180, 7, 95], 10, 1) # Move to position 2
+    time.sleep(move_delay)
+    mc.set_gripper_value(30, 50) # Near-close grippper 
+    time.sleep(gripper_delay)
     mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to  position 1 
     time.sleep(move_delay)
-    mc.set_grippper_vale(100, 50) # Full-open grippper 
-    time.sleep(gripper_delay)
-    mc.send_coords([275, 250, 209, 180, 7, 95], 10, 1) # Move to position 2
-    time.sleep(move_delay)
-    mc.set_grippper_vale(30, 50) # Near-close grippper 
-    time.sleep(gripper_delay)
-    mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to  position 1 
-    time.sleep(move_delay)
-    mc.set_grippper_vale(100, 50) # Full-open grippper 
+    mc.set_gripper_value(100, 50) # Full-open grippper 
     time.sleep(gripper_delay)
 
 
