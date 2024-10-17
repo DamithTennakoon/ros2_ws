@@ -82,7 +82,7 @@ class KeyEECtrl(Node):
         self._gripper_open = 100 # The maximum extension (open) value for the robot gripper
         self._gripper_close = 20 # The close value for the robot gripper
         self._gripper_speed = 50 # Speed of the gripper, in mm/s.
-        self._gripper_delay = 1.7 # Delay after transmitting gripper command
+        self._gripper_delay = 1.0 # Delay after transmitting gripper command
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
