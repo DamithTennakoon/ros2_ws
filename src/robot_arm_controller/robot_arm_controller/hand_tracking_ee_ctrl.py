@@ -88,7 +88,7 @@ class HandTrackingEECtrl(Node):
             [0, 1, 0]
         ]) # Transformation matrix from Unity coordinate system to Robot coordinate system
         self._prev_gripper_state = True # Initialize the previous gripper state to be "open"
-        self._cur_gripper_state = self.prev_gripper_state # Initialize the current gripper state to the previous - stops overlapping signals
+        self._cur_gripper_state = self._prev_gripper_state # Initialize the current gripper state to the previous - stops overlapping signals
         self._gripper_open = 100 # The maximum extension (open) value for the robot gripper
         self._gripper_close = 20 # The close value for the robot gripper
         self._gripper_speed = 50 # Speed of the gripper, in mm/s.
