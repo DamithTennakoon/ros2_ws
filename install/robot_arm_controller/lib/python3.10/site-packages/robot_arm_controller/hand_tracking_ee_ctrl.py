@@ -106,7 +106,7 @@ class HandTrackingEECtrl(Node):
             for i in range(len(self._hand_control_data)):
                 self._hand_control_data[i] = float(split_string_list[i+1]) 
             # Cast and handle the gripper control values
-            if (self._hand_control_datap[6] > 0.0):
+            if (self._hand_control_data[6] > 0.0):
                 self._cur_gripper_state = True # Set the current gripper state to "open"
             else:
                 self._cur_gripper_state = False # Set the current gripper state to "close" 
