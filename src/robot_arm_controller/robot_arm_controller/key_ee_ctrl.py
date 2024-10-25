@@ -61,9 +61,9 @@ class KeyEECtrl(Node):
         time.sleep(10)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
-        self._mc.set_gripper_state(0, 80) # Close gripper
+        self._mc.set_gripper_value(20, 50) # Nearly close gripper
         time.sleep(3)
-        self._mc.set_gripper_state(1,80) # Open Gripper
+        self._mc.set_gripper_value(100, 50) # Open Gripper
         time.sleep(3)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
