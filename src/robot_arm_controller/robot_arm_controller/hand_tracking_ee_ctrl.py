@@ -49,6 +49,9 @@ class HandTrackingEECtrl(Node):
         self.get_logger().info("INITIALIZING CONNECTION TO ROBOT ARM") 
         self._mc = MyCobot("/dev/ttyACM0", 115200) # Instance of the MyCobot class
         time.sleep(1) 
+        self._mc.init_gripper()
+        self._mc.set_gripper_mode(0)
+        time.sleep(1)
         self.get_logger().info("CONNECTION ESTABLISHED")
 
         # Initialize robot arm movements
@@ -61,6 +64,10 @@ class HandTrackingEECtrl(Node):
         time.sleep(10)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
+        self._mc.set_gripper_state(0, 80) # Close gripper
+        time.sleep(3)
+        self._mc.set_gripper_state(1,80) # Open Gripper
+        time.sleep(3)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
         # Create Publisher/Subscriber objects
@@ -80,6 +87,12 @@ class HandTrackingEECtrl(Node):
             [0, 0, -1],
             [0, 1, 0]
         ]) # Transformation matrix from Unity coordinate system to Robot coordinate system
+        self._prev_gripper_state = True # Initialize the previous gripper state to be "open"
+        self._cur_gripper_state = self.prev_gripper_state # Initialize the current gripper state to the previous - stops overlapping signals
+        self._gripper_open = 100 # The maximum extension (open) value for the robot gripper
+        self._gripper_close = 20 # The close value for the robot gripper
+        self._gripper_speed = 50 # Speed of the gripper, in mm/s.
+        self._gripper_delay = 1.0 # Delay after transmitting gripper command
 
         # Create and excute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
@@ -92,10 +105,15 @@ class HandTrackingEECtrl(Node):
             # Convert and store the data 
             for i in range(len(self._hand_control_data)):
                 self._hand_control_data[i] = float(split_string_list[i+1]) 
+            # Cast and handle the gripper control values
+            if (self._hand_control_datap[6] > 0.0):
+                self._cur_gripper_state = True # Set the current gripper state to "open"
+            else:
+                self._cur_gripper_state = False # Set the current gripper state to "close" 
         else:
             for i in range(len(self._hand_control_data)):
                 self._hand_control_data[i] = 0.0 # Zero the data
-
+            
     # Callback method - move end effector of robot arm using cartesian coordinate control function
     def move_robot_arm(self):
         # Update position vector when hand control data is non-zero
@@ -108,9 +126,17 @@ class HandTrackingEECtrl(Node):
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Transmit coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
+        # Update gripper state when robot arm is stationary
         else:
-            self._cur_position = self._cur_position
-
+            self._cur_position = self._cur_position 
+            # Update the gripper state when it's different that the previous state
+            if (self._cur_gripper_state != self._prev_gripper_state):
+                if (self._cur_gripper_state == True):
+                    self._mc.set_gripper_value(self._gripper_open, self._gripper_speed) # Open gripper command
+                    time.sleep(self._gripper_delay) 
+                else:
+                    self._mc.set_gripper_value(self._gripper_close, self._gripper_speed) # Close gripper command
+                    time.sleep(self._gripper_delay)
 
 # Create main method for looping the ROS node
 def main(args=None):
