@@ -113,6 +113,8 @@ class HandTrackingEECtrl(Node):
         else:
             for i in range(len(self._hand_control_data)):
                 self._hand_control_data[i] = 0.0 # Zero the data
+        # TEMP - OUTPUT PARSED HAND DATA
+        self.get_logger().info(f"GRIPPER STATE -> {self._cur_gripper_state}")
             
     # Callback method - move end effector of robot arm using cartesian coordinate control function
     def move_robot_arm(self):
@@ -137,6 +139,7 @@ class HandTrackingEECtrl(Node):
                 else:
                     self._mc.set_gripper_value(self._gripper_close, self._gripper_speed) # Close gripper command
                     time.sleep(self._gripper_delay)
+                self._prev_gripper_state = self._cur_gripper_state # Sync the two states
 
 # Create main method for looping the ROS node
 def main(args=None):
