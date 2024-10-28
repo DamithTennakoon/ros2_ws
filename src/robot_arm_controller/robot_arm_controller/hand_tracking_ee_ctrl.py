@@ -139,6 +139,7 @@ class HandTrackingEECtrl(Node):
                 else:
                     self._mc.set_gripper_value(self._gripper_close, self._gripper_speed) # Close gripper command
                     time.sleep(self._gripper_delay)
+                self._prev_gripper_state = self._cur_gripper_state # Sync the two states
 
 # Create main method for looping the ROS node
 def main(args=None):
