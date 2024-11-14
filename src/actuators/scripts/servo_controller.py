@@ -10,3 +10,5 @@ while (True):
     time.sleep(2)
     servo.angle = 0
     time.sleep(2)
+    servo.angle = -90
+    time.sleep(2)
