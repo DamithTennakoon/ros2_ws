@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            "head_tracking = actuators.head_tracking:main"
         ],
     },
 )
