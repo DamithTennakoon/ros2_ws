@@ -12,13 +12,13 @@ pin = GPIO.PWM(servoGpioPin, 50) # Set GPIO pin 17 to operate at 50Hz
 pin.start(0) # Duty cycle for MG996R servo - units ms
 try:
     while True:
-        pin.ChangeDutyCycle(1.5) # 0
+        pin.ChangeDutyCycle(7.5) # 0
         time.sleep(2)
-        pin.ChangeDutyCycle(2) # 90
+        pin.ChangeDutyCycle(10) # 90
         time.sleep(2)
-        pin.ChangeDutyCycle(1.5) #0
+        pin.ChangeDutyCycle(7.5) #0
         time.sleep(2)
-        pin.ChangeDutyCycle(1) # -90
+        pin.ChangeDutyCycle(5) # -90
         time.sleep(2)
 except KeyboardInterrupt:
     pin.stop()
