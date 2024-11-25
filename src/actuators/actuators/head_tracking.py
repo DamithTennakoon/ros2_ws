@@ -76,7 +76,7 @@ class HeadTracking(Node):
             split_string_list = msg.data.split(',') # Seperate the string using csv format
             # Cast data type to float and store data
             self._hmd_pitch = float(split_string_list[8]) # Index is i+1 due to index[0] value
-            self._hmd_yaw = -1 * float(split_string_list[9]) # Negative to correct for physical placement of the servo motor
+            self._hmd_yaw = float(split_string_list[9]) 
 
     # Callback method - actuate the servo motors using HMD angles
     def actuate_servos(self):
