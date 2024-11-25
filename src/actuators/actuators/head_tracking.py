@@ -15,7 +15,7 @@ from std_msgs.msg import Float64MultiArray
 
 # Import signal libraries
 import time
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 import time
 
 # Import computational libraries
