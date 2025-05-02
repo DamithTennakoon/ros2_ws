@@ -117,6 +117,7 @@ class KeyboardCoordController(Node):
 
         # Store the pose as a local variables
         cur_pose = self._mc.get_coords()
+        self.get_logger().error(f"End Effector Position: {cur_pose[0:3]}") # Added for testing 
 
         # Store the current pose into the MultiArray object
         msg.data = cur_pose
