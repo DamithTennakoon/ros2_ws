@@ -83,9 +83,9 @@ class GlobalRobotCtrl(Node):
             self._cur_position[1] = self._target_position[0] * -1000
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
-            print(f"Target poistion in mm: {self._cur_position[0:4]}")
-            #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
-            #time.sleep(self._command_delay) # Delay to move arm to position
+            #print(f"Target poistion in mm: {self._cur_position[0:4]}")
+            self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
+            time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
     def retrieve_joint_angles(self):
