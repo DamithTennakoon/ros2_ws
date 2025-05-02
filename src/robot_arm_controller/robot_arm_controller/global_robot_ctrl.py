@@ -59,7 +59,13 @@ class GlobalRobotCtrl(Node):
 
     # Define a callback function to retrive and store the angle of joint 0
     def retrieve_joint_angles(self):
-        pass
+        # Retrieve joint angle data
+        joint_angles_msg = Float64MultiArray()
+        cur_angles = self._mc.get_angles()
+        joint_angles_msg.data = cur_angles
+
+        # Publish the data to the topic
+        self._publish_robot_joint_angles.publish(joint_angles_msg)
 
 def main(args=None):
     try:
