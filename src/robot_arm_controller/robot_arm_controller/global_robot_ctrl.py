@@ -7,7 +7,20 @@ from pymycobot.mycobot import MyCobot
 from pymycobot.genre import Angle
 from pymycobot import PI_PORT, PI_BAUD
 import time
+
+# Import computational libraries
 import math
+import numpy as np
+
+# Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
+def yaw_axis_alignment(current_pose, offset):
+    p1_x = current_pose[0] # Parse the x,y coordinates
+    p1_y = current_pose[1]
+    beta = math.atan(-1*p1_x/p1_y) # Compute the immediate angle, radians
+    p2_x = p1_x - offset * math.cos(beta) # Compute the x-component due to the offset
+    p2_y = p1_y - offset * math.sin(beta) # Compute the y-component due to the offset
+    yaw_angle_degrees = math.degrees(math.atan(-p2_x/p2_y)) + 90.0 # Compute actual immediate angle and account for offset angle, degrees
+    return yaw_angle_degrees
 
 class GlobalRobotCtrl(Node):
 
@@ -47,6 +60,10 @@ class GlobalRobotCtrl(Node):
         self._joint_0_angle = self._cur_position[0]
         self._prev_joint_6_angle = self._cur_position[5] 
         self._target_position = [0.0, 0.0, 0.0]
+        self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
+        self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
+        self._move_speed = 25 # Arm movement speed in mm/s
+        self._command_delay = 0.04 # Delay after transmitting motion command
 
     # Define callback function to store topic data into internal variables
     def store_raw_data(self, msg):
@@ -58,13 +75,16 @@ class GlobalRobotCtrl(Node):
             for i in range(len(self._target_position)):
                 self._target_position[i] = float(split_string_list[i+1]) 
 
-        
-
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
-        # Parse raw data into robot_coordinate data
+        # Send position data to robot arm
         if (((self._target_position[0]**2)+(self._target_position[1]**2)+(self._target_position[2]**2)) > 0.0):
-            print(f"TO ROBOT ARM DATA: {self._target_position}")
+            self._cur_position[0] = self._target_position[0] 
+            self._cur_position[1] = self._target_position[1] 
+            self._cur_position[2] = self._target_position[2] 
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
+            self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
+            time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
     def retrieve_joint_angles(self):
