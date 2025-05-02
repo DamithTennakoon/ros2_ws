@@ -24,7 +24,8 @@ setup(
             "hand_coord_controller = robot_arm_controller.hand_coord_controller:main",
             "variable_gripper_controller = robot_arm_controller.variable_gripper_controller:main",
             "key_ee_ctrl = robot_arm_controller.key_ee_ctrl:main",
-            "hand_tracking_ee_ctrl = robot_arm_controller.hand_tracking_ee_ctrl:main"
+            "hand_tracking_ee_ctrl = robot_arm_controller.hand_tracking_ee_ctrl:main",
+            "global_robot_ctrl = robot_arm_controller.global_robot_ctrl:main"
         ],
     },
 )
