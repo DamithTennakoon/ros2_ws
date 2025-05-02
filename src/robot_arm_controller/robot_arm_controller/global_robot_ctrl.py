@@ -24,10 +24,8 @@ class GlobalRobotCtrl(Node):
         self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
         self._mc.set_color(255, 0, 0)
         time.sleep(0.5)
-        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 10) # Move to initialize position 1 using joint controller method
-        time.sleep(10)
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
-        time.sleep(10)
+        time.sleep(5)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
@@ -47,14 +45,23 @@ class GlobalRobotCtrl(Node):
         self._incr_pos = 2.0 # DEF -> 0.5 -> 1 -> 1.3 ->LAST CHANGE 0.8
         self._joint_0_angle = self._cur_position[0]
         self._prev_joint_6_angle = self._cur_position[5] 
+        self._target_position = [0.0, 0.0, 0.0]
 
     # Define callback function to store topic data into internal variables
     def store_raw_data(self, msg):
         self._input_key = msg.data
-        print(f"RAW DATA: {self._input_key}")
+        
+        if (msg.data[:3] == "GRC"):
+            split_string_list = msg.data.split(',') # Seperate the string using csv format
+            # Convert and store the data 
+            for i in range(len(self._target_position)):
+                self._target_position[i] = float(split_string_list[i+1]) 
+
+        print(f"PARSED DATA: {self._target_position}")
 
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
+        # Parse raw data into robot_coordinate data
         pass
 
     # Define a callback function to retrive and store the angle of joint 0
