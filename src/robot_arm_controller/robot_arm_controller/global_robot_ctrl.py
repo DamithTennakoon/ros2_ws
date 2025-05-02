@@ -7,6 +7,7 @@ from pymycobot.mycobot import MyCobot
 from pymycobot.genre import Angle
 from pymycobot import PI_PORT, PI_BAUD
 import time
+import math
 
 class GlobalRobotCtrl(Node):
 
@@ -57,12 +58,13 @@ class GlobalRobotCtrl(Node):
             for i in range(len(self._target_position)):
                 self._target_position[i] = float(split_string_list[i+1]) 
 
-        print(f"PARSED DATA: {self._target_position}")
+        
 
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
         # Parse raw data into robot_coordinate data
-        pass
+        if (((self._target_position[0]**2)+(self._target_position[1]**2)+(self._target_position[2]**2)) > 0.0):
+            print(f"TO ROBOT ARM DATA: {self._target_position}")
 
     # Define a callback function to retrive and store the angle of joint 0
     def retrieve_joint_angles(self):
