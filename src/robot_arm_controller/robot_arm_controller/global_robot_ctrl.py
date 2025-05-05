@@ -11,7 +11,7 @@ import time
 # Import computational libraries
 import math
 import numpy as np
-from tf.transformations import euler_from_quaternion
+from scipy.spatial.transform import Rotation as R
 
 # Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
 def yaw_axis_alignment(current_pose, offset):
@@ -78,6 +78,7 @@ class GlobalRobotCtrl(Node):
                 self._target_position[i] = float(split_string_list[i+1]) 
             for j in range(len(self._target_rotation)):
                 self._target_rotation[j] = float(split_string_list[j+4])
+                
 
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
@@ -87,10 +88,13 @@ class GlobalRobotCtrl(Node):
             self._cur_position[1] = self._target_position[0] * -1000
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
-
+            r = R.from_quat(self._target_rotation)
+            euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
+            roll, pitch, yaw = euler_angles
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
-            print(f"Target rotation: {self._target_rotation}")
+            #print(f"Target rotation: {self._target_rotation}")
+            print(f"Euler Angles: {euler_angles}")
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
