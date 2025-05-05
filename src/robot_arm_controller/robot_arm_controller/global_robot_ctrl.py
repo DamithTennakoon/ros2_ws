@@ -23,6 +23,10 @@ def yaw_axis_alignment(current_pose, offset):
     yaw_angle_degrees = math.degrees(math.atan(-p2_x/p2_y)) + 90.0 # Compute actual immediate angle and account for offset angle, degrees
     return yaw_angle_degrees
 
+# Function - convert all angles between 0-360
+def to_positive_angle(angle):
+    return angle % 360
+
 class GlobalRobotCtrl(Node):
 
     def __init__(self):
@@ -92,9 +96,9 @@ class GlobalRobotCtrl(Node):
             euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
             roll, pitch, yaw = euler_angles
 
-            roll_r = roll + self._cur_position[3]
-            pitch_r = yaw + self._cur_position[4]
-            yaw_r = -pitch + self._cur_position[5]
+            roll_r = to_positive_angle(roll + self._cur_position[3])
+            pitch_r = to_positive_angle(yaw + self._cur_position[4])
+            yaw_r = to_positive_angle(-pitch + self._cur_position[5])
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
             #print(f"Target rotation: {self._target_rotation}")
