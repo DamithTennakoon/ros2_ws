@@ -94,7 +94,7 @@ class GlobalRobotCtrl(Node):
 
             roll_r = -yaw + self._cur_position[3]
             pitch_r = -roll + self._cur_position[4]
-            yaw_r = -pitch + self._cur_position[5]
+            yaw_r = pitch + self._cur_position[5]
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
             #print(f"Target rotation: {self._target_rotation}")
