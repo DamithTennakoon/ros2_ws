@@ -60,6 +60,7 @@ class GlobalRobotCtrl(Node):
         self._joint_0_angle = self._cur_position[0]
         self._prev_joint_6_angle = self._cur_position[5] 
         self._target_position = [0.0, 0.0, 0.0]
+        self._target_rotation = [0.0, 0.0, 0.0, 0.0] # qx, qy, qz, qw
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
         self._move_speed = 25 # Arm movement speed in mm/s
@@ -74,6 +75,8 @@ class GlobalRobotCtrl(Node):
             # Convert and store the data 
             for i in range(len(self._target_position)):
                 self._target_position[i] = float(split_string_list[i+1]) 
+            for j in range(len(self._target_rotation)):
+                self._target_rotation[j] = float(split_string_list[j+4])
 
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
@@ -83,8 +86,12 @@ class GlobalRobotCtrl(Node):
             self._cur_position[1] = self._target_position[0] * -1000
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
+
+            # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
-            self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
+            print(f"Target rotation: {self._target_rotation}")
+            # Serial communications
+            #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
