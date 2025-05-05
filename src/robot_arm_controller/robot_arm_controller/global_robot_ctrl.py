@@ -91,12 +91,16 @@ class GlobalRobotCtrl(Node):
             r = R.from_quat(self._target_rotation)
             euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
             roll, pitch, yaw = euler_angles
+            roll_r = yaw + self._cur_position[3]
+            pitch_r = -roll + self._cur_position[4]
+            yaw_r = pitch + self._cur_position[5]
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
             #print(f"Target rotation: {self._target_rotation}")
-            print(f"Euler Angles: {euler_angles}")
+            print(f"Euler Angles: {roll_r, pitch_r, yaw_r}")
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
+            #self._mc.send_coords([93, -120, 280, roll, pitch, yaw], self._move_speed, 1) #  Testing orientation - fixed position
             time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
