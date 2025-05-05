@@ -89,12 +89,12 @@ class GlobalRobotCtrl(Node):
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             r = R.from_quat(self._target_rotation)
-            euler_angles = r.as_euler('zyx', degrees=True)  # returns roll, pitch, yaw in degrees
+            euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
             roll, pitch, yaw = euler_angles
 
-            roll_r = yaw + self._cur_position[3]
-            pitch_r = roll + self._cur_position[4]
-            yaw_r = -pitch + self._cur_position[5]
+            roll_r = roll + self._cur_position[3]
+            pitch_r = -yaw + self._cur_position[4]
+            yaw_r = pitch + self._cur_position[5]
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
             #print(f"Target rotation: {self._target_rotation}")
