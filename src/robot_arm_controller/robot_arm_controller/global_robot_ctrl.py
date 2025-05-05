@@ -92,7 +92,7 @@ class GlobalRobotCtrl(Node):
             euler_angles = r.as_euler('zyx', degrees=True)  # returns roll, pitch, yaw in degrees
             roll, pitch, yaw = euler_angles
 
-            roll_r = 0 + self._cur_position[3]
+            roll_r = yaw + self._cur_position[3]
             pitch_r = -roll + self._cur_position[4]
             yaw_r = pitch + self._cur_position[5]
             # Logging
