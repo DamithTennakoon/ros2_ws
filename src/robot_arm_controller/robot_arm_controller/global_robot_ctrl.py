@@ -93,7 +93,7 @@ class GlobalRobotCtrl(Node):
             roll, pitch, yaw = euler_angles
 
             roll_r = 0 + self._cur_position[3]
-            pitch_r = 0 + self._cur_position[4]
+            pitch_r = -roll + self._cur_position[4]
             yaw_r = pitch + self._cur_position[5]
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
