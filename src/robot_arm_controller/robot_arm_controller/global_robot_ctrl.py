@@ -11,6 +11,7 @@ import time
 # Import computational libraries
 import math
 import numpy as np
+from tf.transformations import euler_from_quaternion
 
 # Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
 def yaw_axis_alignment(current_pose, offset):
