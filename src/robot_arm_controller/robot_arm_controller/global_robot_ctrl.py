@@ -25,7 +25,10 @@ def yaw_axis_alignment(current_pose, offset):
 
 # Function - convert all angles between 0-360
 def to_positive_angle(angle):
-    return angle % 360
+    angle = angle % 360
+    if angle >= 180:
+        angle -= 360
+    return angle
 
 class GlobalRobotCtrl(Node):
 
