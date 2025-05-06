@@ -58,7 +58,7 @@ class GlobalRobotCtrl(Node):
         self.raw_data_subscriber = self.create_subscription(String, 'raw_input_data', self.store_raw_data, 10)
 
         # Create/execute callback functions
-        self._move_robot_timer = self.create_timer(0.001, self.move_robot_arm) # DEFAULT: 0.005
+        self._move_robot_timer = self.create_timer(0.1, self.move_robot_arm) # DEFAULT: 0.001
         self._retrieve_joint_angles = self.create_timer(0.01, self.retrieve_joint_angles)
 
         # Define variables for local data storage 
@@ -109,7 +109,7 @@ class GlobalRobotCtrl(Node):
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
-            time.sleep(self._command_delay) # Delay to move arm to position
+            #time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
     def retrieve_joint_angles(self):
