@@ -30,10 +30,18 @@ def to_positive_angle(angle):
         angle -= 360
     return angle
 
-# Function - deadband position
+# Function - position deadband
 def is_significant_change(new_position, pre_position, pos_thresh = 2.0):
     magnitude = math.sqrt((new_position[0]-pre_position[0])**2 + (new_position[1]-pre_position[1])**2 + (new_position[2]-pre_position[2])**2)
     if (magnitude >= pos_thresh):
+        return True
+    else:
+        return False
+    
+# Function - orientation deadband
+def is_signicant_rotation(new_rotation, pre_rotation, angle_thresh = 1.0):
+    magnitude = math.sqrt((new_rotation[0]-pre_rotation[0])**2 + (new_rotation[1]-pre_rotation[1])**2 + (new_rotation[2]-pre_rotation[2])**2)
+    if (magnitude >= angle_thresh):
         return True
     else:
         return False
@@ -100,6 +108,7 @@ class GlobalRobotCtrl(Node):
         # Send position data to robot arm
         if (((self._target_position[0]**2)+(self._target_position[1]**2)+(self._target_position[2]**2)) > 0.0):
             old_position = [self._cur_position[0], self._cur_position[1], self._cur_position[2]]
+            old_rotation = [self._cur_position[3], self._cur_position[4], self._cur_position[5]]
 
             self._cur_position[0] = self._target_position[2] * 1000
             self._cur_position[1] = self._target_position[0] * -1000
@@ -117,6 +126,8 @@ class GlobalRobotCtrl(Node):
             pitch_r = to_positive_angle(yaw + self._cur_position[4])
             yaw_r = to_positive_angle(-pitch + self._cur_position[5])
 
+            new_rotation = [roll_r, pitch_r, yaw_r]
+
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
             #print(f"Target rotation: {self._target_rotation}")
@@ -124,7 +135,7 @@ class GlobalRobotCtrl(Node):
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             
-            if (is_significant_change(new_position, old_position)):
+            if (is_significant_change(new_position, old_position) or is_signicant_rotation(new_rotation, old_rotation)):
                 self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1)
             #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
