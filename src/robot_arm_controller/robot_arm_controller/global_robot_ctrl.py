@@ -30,15 +30,6 @@ def to_positive_angle(angle):
         angle -= 360
     return angle
 
-# Function - position deadband
-def is_significant_change(new, old, pos_thresh=2.0):  # mm
-    return any(abs(n - o) > pos_thresh for n, o in zip(new, old))
-
-# Function - orientatin deadband
-def is_significant_rotation(new, old, angle_thresh=1.0):  # degrees
-    return any(abs(n - o) > angle_thresh for n, o in zip(new, old))
-
-
 class GlobalRobotCtrl(Node):
 
     def __init__(self):
@@ -80,7 +71,7 @@ class GlobalRobotCtrl(Node):
         self._target_rotation = [0.0, 0.0, 0.0, 0.0] # qx, qy, qz, qw
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
-        self._move_speed = 50 # Arm movement speed in mm/s (defualt 25mm/s)
+        self._move_speed = 35 # Arm movement speed in mm/s (defualt 25mm/s)
         self._command_delay = 0.015 # Delay after transmitting motion command (default 0.04s)
 
     # Define callback function to store topic data into internal variables
@@ -104,8 +95,6 @@ class GlobalRobotCtrl(Node):
             self._cur_position[1] = self._target_position[0] * -1000
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
-
-            target_pos = [self._target_position[2]*1000, -self._target_position[0]*1000, self._target_position[1]*1000]
             
             r = R.from_quat(self._target_rotation)
             euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
@@ -114,16 +103,6 @@ class GlobalRobotCtrl(Node):
             roll_r = to_positive_angle(roll + self._cur_position[3])
             pitch_r = to_positive_angle(yaw + self._cur_position[4])
             yaw_r = to_positive_angle(-pitch + self._cur_position[5])
-
-            self._cur_position[3] = roll_r
-            self._cur_position[4] = pitch_r
-            self._cur_position[5] = yaw_r
-
-            target_rot = [
-                to_positive_angle(roll + self._cur_position[3]),
-                to_positive_angle(yaw + self._cur_position[4]),
-                to_positive_angle(-pitch + self._cur_position[5])
-            ]
 
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
