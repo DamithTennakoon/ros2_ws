@@ -30,6 +30,15 @@ def to_positive_angle(angle):
         angle -= 360
     return angle
 
+# Function - position deadband
+def is_significant_change(new, old, pos_thresh=2.0):  # mm
+    return any(abs(n - o) > pos_thresh for n, o in zip(new, old))
+
+# Function - orientatin deadband
+def is_significant_rotation(new, old, angle_thresh=1.0):  # degrees
+    return any(abs(n - o) > angle_thresh for n, o in zip(new, old))
+
+
 class GlobalRobotCtrl(Node):
 
     def __init__(self):
@@ -95,6 +104,9 @@ class GlobalRobotCtrl(Node):
             self._cur_position[1] = self._target_position[0] * -1000
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
+
+            target_pos = [self._target_position[2]*1000, -self._target_position[0]*1000, self._target_position[1]*1000]
+            
             r = R.from_quat(self._target_rotation)
             euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
             roll, pitch, yaw = euler_angles
@@ -102,13 +114,24 @@ class GlobalRobotCtrl(Node):
             roll_r = to_positive_angle(roll + self._cur_position[3])
             pitch_r = to_positive_angle(yaw + self._cur_position[4])
             yaw_r = to_positive_angle(-pitch + self._cur_position[5])
+
+            target_rot = [
+                to_positive_angle(roll + self._cur_position[3]),
+                to_positive_angle(yaw + self._cur_position[4]),
+                to_positive_angle(-pitch + self._cur_position[5])
+            ]
+
             # Logging
             #print(f"Target poistion in mm: {self._cur_position[0:4]}")
             #print(f"Target rotation: {self._target_rotation}")
             print(f"Euler Angles: {roll_r, pitch_r, yaw_r}")
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
-            self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
+            if is_significant_change(target_pos, self._cur_position[0:3]) or is_significant_rotation(target_rot, self._cur_position[3:6]):
+                self._cur_position[0:3] = target_pos
+                self._cur_position[3:6] = target_rot
+                self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1)
+            #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
