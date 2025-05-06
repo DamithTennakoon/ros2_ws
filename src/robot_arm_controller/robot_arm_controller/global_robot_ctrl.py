@@ -115,6 +115,10 @@ class GlobalRobotCtrl(Node):
             pitch_r = to_positive_angle(yaw + self._cur_position[4])
             yaw_r = to_positive_angle(-pitch + self._cur_position[5])
 
+            self._cur_position[3] = roll_r
+            self._cur_position[4] = pitch_r
+            self._cur_position[5] = yaw_r
+
             target_rot = [
                 to_positive_angle(roll + self._cur_position[3]),
                 to_positive_angle(yaw + self._cur_position[4]),
@@ -130,7 +134,7 @@ class GlobalRobotCtrl(Node):
             if is_significant_change(target_pos, self._cur_position[0:3]) or is_significant_rotation(target_rot, self._cur_position[3:6]):
                 self._cur_position[0:3] = target_pos
                 self._cur_position[3:6] = target_rot
-                self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1)
+                self._mc.send_coords(self._cur_position, self._move_speed, 1)
             #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
 
