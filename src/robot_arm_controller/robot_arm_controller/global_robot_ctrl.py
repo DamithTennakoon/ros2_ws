@@ -30,6 +30,14 @@ def to_positive_angle(angle):
         angle -= 360
     return angle
 
+# Function - deadband position
+def is_significant_change(new_position, pre_position, pos_thresh = 2.0):
+    magnitude = math.sqrt((new_position[0]-pre_position[0])**2 + (new_position[1]-pre_position[1])**2 + (new_position[2]-pre_position[2])**2)
+    if (magnitude >= pos_thresh):
+        return True
+    else:
+        return False
+
 class GlobalRobotCtrl(Node):
 
     def __init__(self):
@@ -91,10 +99,15 @@ class GlobalRobotCtrl(Node):
     def move_robot_arm(self):
         # Send position data to robot arm
         if (((self._target_position[0]**2)+(self._target_position[1]**2)+(self._target_position[2]**2)) > 0.0):
+            old_position = [self._cur_position[0], self._cur_position[1], self._cur_position[2]]
+
             self._cur_position[0] = self._target_position[2] * 1000
             self._cur_position[1] = self._target_position[0] * -1000
             self._cur_position[2] = self._target_position[1] * 1000
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
+
+            new_position = [self._target_position[2] * 1000, self._target_position[0] * -1000, self._target_position[1] * 1000]
+
             
             r = R.from_quat(self._target_rotation)
             euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
@@ -111,7 +124,9 @@ class GlobalRobotCtrl(Node):
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             
-            self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
+            if (is_significant_change(new_position, old_position)):
+                self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1)
+            #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
