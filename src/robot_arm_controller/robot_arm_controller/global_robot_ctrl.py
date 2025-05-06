@@ -132,7 +132,7 @@ class GlobalRobotCtrl(Node):
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             
-            self._mc.send_coords(self._cur_position, self._move_speed, 1) #  Testing orientation - fixed position
+            self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
