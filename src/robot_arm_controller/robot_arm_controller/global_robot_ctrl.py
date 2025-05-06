@@ -136,7 +136,7 @@ class GlobalRobotCtrl(Node):
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             
             if (is_significant_change(new_position, old_position) or is_signicant_rotation(new_rotation, old_rotation)):
-                self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1)
+                self._mc.send_coords([93, -120, 280, roll_r, pitch_r, yaw_r], self._move_speed, 1)
             #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
 
