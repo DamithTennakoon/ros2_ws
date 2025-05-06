@@ -131,11 +131,8 @@ class GlobalRobotCtrl(Node):
             print(f"Euler Angles: {roll_r, pitch_r, yaw_r}")
             # Serial communications
             #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
-            if is_significant_change(target_pos, self._cur_position[0:3]) or is_significant_rotation(target_rot, self._cur_position[3:6]):
-                self._cur_position[0:3] = target_pos
-                self._cur_position[3:6] = target_rot
-                self._mc.send_coords(self._cur_position, self._move_speed, 1)
-            #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
+            
+            self._mc.send_coords(self._cur_position, self._move_speed, 1) #  Testing orientation - fixed position
             #time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
