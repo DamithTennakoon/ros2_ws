@@ -87,7 +87,7 @@ class GlobalRobotCtrl(Node):
         self._target_rotation = [0.0, 0.0, 0.0, 0.0] # qx, qy, qz, qw
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
-        self._move_speed = 25 # Arm movement speed in mm/s (defualt 25mm/s)
+        self._move_speed = 30 # Arm movement speed in mm/s (defualt 25mm/s)
         self._command_delay = 0.015 # Delay after transmitting motion command (default 0.04s)
 
     # Define callback function to store topic data into internal variables
