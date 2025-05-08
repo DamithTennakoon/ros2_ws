@@ -31,7 +31,7 @@ def to_positive_angle(angle):
     return angle
 
 # Function - position deadband
-def is_significant_change(new_position, pre_position, pos_thresh = 4.0):
+def is_significant_change(new_position, pre_position, pos_thresh = 2.0):
     magnitude = math.sqrt((new_position[0]-pre_position[0])**2 + (new_position[1]-pre_position[1])**2 + (new_position[2]-pre_position[2])**2)
     if (magnitude >= pos_thresh):
         return True
@@ -39,7 +39,7 @@ def is_significant_change(new_position, pre_position, pos_thresh = 4.0):
         return False
     
 # Function - orientation deadband
-def is_signicant_rotation(new_rotation, pre_rotation, angle_thresh = 3.0):
+def is_signicant_rotation(new_rotation, pre_rotation, angle_thresh = 2.0):
     magnitude = math.sqrt((new_rotation[0]-pre_rotation[0])**2 + (new_rotation[1]-pre_rotation[1])**2 + (new_rotation[2]-pre_rotation[2])**2)
     if (magnitude >= angle_thresh):
         return True
