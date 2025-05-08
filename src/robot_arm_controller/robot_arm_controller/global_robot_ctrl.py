@@ -74,7 +74,7 @@ class GlobalRobotCtrl(Node):
         self.raw_data_subscriber = self.create_subscription(String, 'raw_input_data', self.store_raw_data, 10)
 
         # Create/execute callback functions
-        self._move_robot_timer = self.create_timer(0.15, self.move_robot_arm) # DEFAULT: 0.1
+        self._move_robot_timer = self.create_timer(0.1, self.move_robot_arm) # DEFAULT: 0.1
         self._retrieve_joint_angles = self.create_timer(0.01, self.retrieve_joint_angles)
 
         # Define variables for local data storage 
