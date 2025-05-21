@@ -26,7 +26,7 @@ setup(
             "key_ee_ctrl = robot_arm_controller.key_ee_ctrl:main",
             "hand_tracking_ee_ctrl = robot_arm_controller.hand_tracking_ee_ctrl:main",
             "global_robot_ctrl = robot_arm_controller.global_robot_ctrl:main",
-            "fpv_global_ctrl = robot_arm_controller.fpb_global_ctrl:main"
+            "fpv_global_ctrl = robot_arm_controller.fpv_global_ctrl:main"
         ],
     },
 )
