@@ -101,6 +101,10 @@ class FpvGlobalCtrl(Node):
         # Log data to the user
         self.get_logger().info(f"Track type: {msg.data[:3]} Target Position: {self._target_position} Gripper State: {self._cur_gripper_state}")
 
+    # Callback method - move end effector of robot arm using cartesian coordinate control function
+    def move_robot_arm(self):
+        pass
+
 # Create main method for looping the ROS node
 def main(args=None):
     try:
