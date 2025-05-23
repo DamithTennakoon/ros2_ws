@@ -43,6 +43,22 @@ class FpvGlobalCtrl(Node):
         super().__init__("fpv_global_ctrl")
         self.get_logger().info("INITIALIZING FPV GLOBAL END EFFECTOR CONTROLLER NODE")
 
+        # Initialize connection to robot arm
+        self.get_logger().info("INITIALIZING CONNECTION TO ROBOT ARM") 
+        self._mc = MyCobot("/dev/ttyACM0", 115200) # Instance of the MyCobot class
+        time.sleep(1)
+        self.get_logger().info("CONNECTION ESTABLISHED")
+
+        # Initialize robot arm movements
+        self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
+        self._mc.set_color(255, 0, 0)
+        time.sleep(0.5)
+        self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
+        time.sleep(5)
+        self._mc.set_color(255, 255, 255)
+        time.sleep(0.5)
+        self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
+
 # Create main method for looping the ROS node
 def main(args=None):
     try:
