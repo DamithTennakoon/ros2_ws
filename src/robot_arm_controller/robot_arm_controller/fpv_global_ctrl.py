@@ -59,6 +59,46 @@ class FpvGlobalCtrl(Node):
         time.sleep(0.5)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
+        # Create Publisher/Subscriber objects
+        self._publish_robot_pose = self.create_publisher(Float64MultiArray, 'robot_pose', 10)
+        self._publish_robot_joint_angles = self.create_publisher(Float64MultiArray, 'robot_joint_angles', 10)
+        self.raw_data_subscriber = self.create_subscription(String, 'raw_input_data', self.store_raw_data, 10)
+
+        # Create/execute callback functions
+        self._move_robot_timer = self.create_timer(0.1, self.move_robot_arm) # DEFAULT: 0.1
+        self._retrieve_joint_angles = self.create_timer(0.01, self.retrieve_joint_angles)
+
+        # Define variables for local data storage 
+        self._target_position = [0.0, 0.0, 0.0]
+        self._target_rotation = [0.0, 0.0, 0.0, 0.0] # qx, qy, qz, qw
+        self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
+        self._prev_gripper_state = True # Initialize the previous gripper state to be "open"
+        self._cur_gripper_state = self._prev_gripper_state # Initialize the current gripper state to the previous - stops overlapping signals
+
+# Define callback function to store topic data into internal variables
+    def store_raw_data(self, msg):        
+        # Parse for First Person Control
+        if (msg.data[:3] == "HTC"):
+            split_string_list = msg.data.split(',') # Seperate the string using csv format
+            # Convert and store the data 
+            for i in range(len(self._target_position)):
+                self._target_position[i] = float(split_string_list[i+1])
+                # Cast and handle the gripper control values
+                if (float(split_string_list[i+6]) == 1.0): 
+                    self._cur_gripper_state = True # Set the current gripper state to "open"
+                else:
+                    self._cur_gripper_state = False # Set the current gripper state to "close"
+
+        # Parse for Global Robot Control
+        if (msg.data[:3] == "GRC"):
+            split_string_list = msg.data.split(',') # Seperate the string using csv format
+            # Convert and store the data 
+            for i in range(len(self._target_position)):
+                self._target_position[i] = float(split_string_list[i+1]) 
+            for j in range(len(self._target_rotation)):
+                self._target_rotation[j] = float(split_string_list[j+4])
+
+
 # Create main method for looping the ROS node
 def main(args=None):
     try:
