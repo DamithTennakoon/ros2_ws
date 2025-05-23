@@ -98,6 +98,8 @@ class FpvGlobalCtrl(Node):
             for j in range(len(self._target_rotation)):
                 self._target_rotation[j] = float(split_string_list[j+4])
 
+        # Log data to the user
+        self.get_logger().info(f"Track type: {msg.data[:3]} Target Position: {self._target_position} Gripper State: {self._cur_gripper_state}")
 
 # Create main method for looping the ROS node
 def main(args=None):
