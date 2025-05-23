@@ -1,0 +1,399 @@
+[0.000000] (-) TimerEvent: {}
+[0.001910] (data_collection) JobQueued: {'identifier': 'data_collection', 'dependencies': OrderedDict()}
+[0.002620] (hri_comms) JobQueued: {'identifier': 'hri_comms', 'dependencies': OrderedDict()}
+[0.002936] (my_robot_controller) JobQueued: {'identifier': 'my_robot_controller', 'dependencies': OrderedDict()}
+[0.003119] (servo_controller) JobQueued: {'identifier': 'servo_controller', 'dependencies': OrderedDict()}
+[0.003466] (actuators) JobQueued: {'identifier': 'actuators', 'dependencies': OrderedDict([('hri_comms', '/home/rpi/ros2_ws/install/hri_comms')])}
+[0.003586] (robot_arm_controller) JobQueued: {'identifier': 'robot_arm_controller', 'dependencies': OrderedDict([('hri_comms', '/home/rpi/ros2_ws/install/hri_comms')])}
+[0.003692] (hri_comms) JobStarted: {'identifier': 'hri_comms'}
+[0.099163] (-) TimerEvent: {}
+[0.199808] (-) TimerEvent: {}
+[0.300804] (-) TimerEvent: {}
+[0.404191] (-) TimerEvent: {}
+[0.456358] (data_collection) JobStarted: {'identifier': 'data_collection'}
+[0.507157] (-) TimerEvent: {}
+[0.608426] (-) TimerEvent: {}
+[0.709285] (-) TimerEvent: {}
+[0.810566] (-) TimerEvent: {}
+[0.899808] (my_robot_controller) JobStarted: {'identifier': 'my_robot_controller'}
+[0.910942] (-) TimerEvent: {}
+[1.012842] (-) TimerEvent: {}
+[1.116393] (-) TimerEvent: {}
+[1.217746] (-) TimerEvent: {}
+[1.318772] (-) TimerEvent: {}
+[1.385832] (servo_controller) JobStarted: {'identifier': 'servo_controller'}
+[1.419075] (-) TimerEvent: {}
+[1.520085] (-) TimerEvent: {}
+[1.620856] (-) TimerEvent: {}
+[1.722265] (-) TimerEvent: {}
+[1.823014] (-) TimerEvent: {}
+[1.923804] (-) TimerEvent: {}
+[2.024557] (-) TimerEvent: {}
+[2.125272] (-) TimerEvent: {}
+[2.226024] (-) TimerEvent: {}
+[2.326766] (-) TimerEvent: {}
+[2.427440] (-) TimerEvent: {}
+[2.528127] (-) TimerEvent: {}
+[2.628843] (-) TimerEvent: {}
+[2.729515] (-) TimerEvent: {}
+[2.830222] (-) TimerEvent: {}
+[2.931100] (-) TimerEvent: {}
+[3.031869] (-) TimerEvent: {}
+[3.132572] (-) TimerEvent: {}
+[3.233451] (-) TimerEvent: {}
+[3.334548] (-) TimerEvent: {}
+[3.435795] (-) TimerEvent: {}
+[3.537058] (-) TimerEvent: {}
+[3.637894] (-) TimerEvent: {}
+[3.738726] (-) TimerEvent: {}
+[3.839452] (-) TimerEvent: {}
+[3.940176] (-) TimerEvent: {}
+[4.040890] (-) TimerEvent: {}
+[4.141612] (-) TimerEvent: {}
+[4.242338] (-) TimerEvent: {}
+[4.343058] (-) TimerEvent: {}
+[4.443745] (-) TimerEvent: {}
+[4.544432] (-) TimerEvent: {}
+[4.645157] (-) TimerEvent: {}
+[4.745865] (-) TimerEvent: {}
+[4.846599] (-) TimerEvent: {}
+[4.947303] (-) TimerEvent: {}
+[5.048113] (-) TimerEvent: {}
+[5.149193] (-) TimerEvent: {}
+[5.250273] (-) TimerEvent: {}
+[5.351052] (-) TimerEvent: {}
+[5.451852] (-) TimerEvent: {}
+[5.552764] (-) TimerEvent: {}
+[5.653508] (-) TimerEvent: {}
+[5.754270] (-) TimerEvent: {}
+[5.855017] (-) TimerEvent: {}
+[5.955730] (-) TimerEvent: {}
+[6.056432] (-) TimerEvent: {}
+[6.157157] (-) TimerEvent: {}
+[6.257835] (-) TimerEvent: {}
+[6.358581] (-) TimerEvent: {}
+[6.459288] (-) TimerEvent: {}
+[6.559986] (-) TimerEvent: {}
+[6.660814] (-) TimerEvent: {}
+[6.761649] (-) TimerEvent: {}
+[6.862911] (-) TimerEvent: {}
+[6.963632] (-) TimerEvent: {}
+[7.064366] (-) TimerEvent: {}
+[7.165857] (-) TimerEvent: {}
+[7.267248] (-) TimerEvent: {}
+[7.368369] (-) TimerEvent: {}
+[7.469125] (-) TimerEvent: {}
+[7.569919] (-) TimerEvent: {}
+[7.670676] (-) TimerEvent: {}
+[7.771369] (-) TimerEvent: {}
+[7.872068] (-) TimerEvent: {}
+[7.972765] (-) TimerEvent: {}
+[8.073647] (-) TimerEvent: {}
+[8.174397] (-) TimerEvent: {}
+[8.275162] (-) TimerEvent: {}
+[8.375876] (-) TimerEvent: {}
+[8.476580] (-) TimerEvent: {}
+[8.577457] (-) TimerEvent: {}
+[8.678660] (-) TimerEvent: {}
+[8.784724] (-) TimerEvent: {}
+[8.887120] (-) TimerEvent: {}
+[8.991407] (-) TimerEvent: {}
+[9.092154] (-) TimerEvent: {}
+[9.193607] (-) TimerEvent: {}
+[9.295294] (-) TimerEvent: {}
+[9.397074] (-) TimerEvent: {}
+[9.499126] (-) TimerEvent: {}
+[9.600911] (-) TimerEvent: {}
+[9.702464] (-) TimerEvent: {}
+[9.804042] (-) TimerEvent: {}
+[9.905618] (-) TimerEvent: {}
+[10.007367] (-) TimerEvent: {}
+[10.108943] (-) TimerEvent: {}
+[10.209856] (-) TimerEvent: {}
+[10.310911] (-) TimerEvent: {}
+[10.412506] (-) TimerEvent: {}
+[10.514278] (-) TimerEvent: {}
+[10.616411] (-) TimerEvent: {}
+[10.718058] (-) TimerEvent: {}
+[10.819153] (-) TimerEvent: {}
+[10.920357] (-) TimerEvent: {}
+[11.021611] (-) TimerEvent: {}
+[11.122746] (-) TimerEvent: {}
+[11.223853] (-) TimerEvent: {}
+[11.325197] (-) TimerEvent: {}
+[11.427404] (-) TimerEvent: {}
+[11.530079] (-) TimerEvent: {}
+[11.632796] (-) TimerEvent: {}
+[11.704535] (data_collection) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/data_collection', 'build', '--build-base', '/home/rpi/ros2_ws/build/data_collection/build', 'install', '--record', '/home/rpi/ros2_ws/build/data_collection/install.log', '--single-version-externally-managed'], 'cwd': '/home/rpi/ros2_ws/src/data_collection', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_CA:en', 'USER': 'rpi', 'SSH_CLIENT': '130.63.250.163 64232 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/rpi', 'OLDPWD': '/home/rpi', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/rpi/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'rpi', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm', 'XDG_SESSION_ID': '6', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/rpi/ros2_ws/install/servo_controller:/home/rpi/ros2_ws/install/robot_arm_controller:/home/rpi/ros2_ws/install/my_robot_controller:/home/rpi/ros2_ws/install/actuators:/home/rpi/ros2_ws/install/hri_comms:/home/rpi/ros2_ws/install/data_collection:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/rpi/ros2_ws/build/data_collection', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '130.63.250.163 64232 130.63.213.137 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/rpi/ros2_ws/build/data_collection/prefix_override:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[11.735519] (hri_comms) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/hri_comms', 'build', '--build-base', '/home/rpi/ros2_ws/build/hri_comms/build', 'install', '--record', '/home/rpi/ros2_ws/build/hri_comms/install.log', '--single-version-externally-managed'], 'cwd': '/home/rpi/ros2_ws/src/hri_comms', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_CA:en', 'USER': 'rpi', 'SSH_CLIENT': '130.63.250.163 64232 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/rpi', 'OLDPWD': '/home/rpi', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/rpi/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'rpi', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm', 'XDG_SESSION_ID': '6', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/rpi/ros2_ws/install/servo_controller:/home/rpi/ros2_ws/install/robot_arm_controller:/home/rpi/ros2_ws/install/my_robot_controller:/home/rpi/ros2_ws/install/actuators:/home/rpi/ros2_ws/install/hri_comms:/home/rpi/ros2_ws/install/data_collection:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/rpi/ros2_ws/build/hri_comms', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '130.63.250.163 64232 130.63.213.137 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/rpi/ros2_ws/build/hri_comms/prefix_override:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[11.744005] (-) TimerEvent: {}
+[11.790044] (my_robot_controller) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/my_robot_controller', 'build', '--build-base', '/home/rpi/ros2_ws/build/my_robot_controller/build', 'install', '--record', '/home/rpi/ros2_ws/build/my_robot_controller/install.log', '--single-version-externally-managed'], 'cwd': '/home/rpi/ros2_ws/src/my_robot_controller', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_CA:en', 'USER': 'rpi', 'SSH_CLIENT': '130.63.250.163 64232 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/rpi', 'OLDPWD': '/home/rpi', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/rpi/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'rpi', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm', 'XDG_SESSION_ID': '6', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/rpi/ros2_ws/install/servo_controller:/home/rpi/ros2_ws/install/robot_arm_controller:/home/rpi/ros2_ws/install/my_robot_controller:/home/rpi/ros2_ws/install/actuators:/home/rpi/ros2_ws/install/hri_comms:/home/rpi/ros2_ws/install/data_collection:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/rpi/ros2_ws/build/my_robot_controller', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '130.63.250.163 64232 130.63.213.137 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/rpi/ros2_ws/build/my_robot_controller/prefix_override:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[11.802270] (servo_controller) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/servo_controller', 'build', '--build-base', '/home/rpi/ros2_ws/build/servo_controller/build', 'install', '--record', '/home/rpi/ros2_ws/build/servo_controller/install.log', '--single-version-externally-managed'], 'cwd': '/home/rpi/ros2_ws/src/servo_controller', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_CA:en', 'USER': 'rpi', 'SSH_CLIENT': '130.63.250.163 64232 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/rpi', 'OLDPWD': '/home/rpi', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/rpi/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'rpi', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm', 'XDG_SESSION_ID': '6', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/rpi/ros2_ws/install/servo_controller:/home/rpi/ros2_ws/install/robot_arm_controller:/home/rpi/ros2_ws/install/my_robot_controller:/home/rpi/ros2_ws/install/actuators:/home/rpi/ros2_ws/install/hri_comms:/home/rpi/ros2_ws/install/data_collection:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/rpi/ros2_ws/build/servo_controller', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '130.63.250.163 64232 130.63.213.137 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/rpi/ros2_ws/build/servo_controller/prefix_override:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[11.844182] (-) TimerEvent: {}
+[11.945990] (-) TimerEvent: {}
+[12.047788] (-) TimerEvent: {}
+[12.149593] (-) TimerEvent: {}
+[12.251209] (-) TimerEvent: {}
+[12.352255] (-) TimerEvent: {}
+[12.453223] (-) TimerEvent: {}
+[12.554119] (-) TimerEvent: {}
+[12.655056] (-) TimerEvent: {}
+[12.756038] (-) TimerEvent: {}
+[12.856928] (-) TimerEvent: {}
+[12.957799] (-) TimerEvent: {}
+[13.058735] (-) TimerEvent: {}
+[13.166078] (-) TimerEvent: {}
+[13.267767] (-) TimerEvent: {}
+[13.368703] (-) TimerEvent: {}
+[13.469667] (-) TimerEvent: {}
+[13.570635] (-) TimerEvent: {}
+[13.624863] (data_collection) StdoutLine: {'line': b'running egg_info\n'}
+[13.628496] (data_collection) StdoutLine: {'line': b'writing ../../build/data_collection/data_collection.egg-info/PKG-INFO\n'}
+[13.630645] (data_collection) StdoutLine: {'line': b'writing dependency_links to ../../build/data_collection/data_collection.egg-info/dependency_links.txt\n'}
+[13.632357] (data_collection) StdoutLine: {'line': b'writing entry points to ../../build/data_collection/data_collection.egg-info/entry_points.txt\n'}
+[13.635106] (data_collection) StdoutLine: {'line': b'writing requirements to ../../build/data_collection/data_collection.egg-info/requires.txt\n'}
+[13.636188] (hri_comms) StdoutLine: {'line': b'running egg_info\n'}
+[13.637009] (data_collection) StdoutLine: {'line': b'writing top-level names to ../../build/data_collection/data_collection.egg-info/top_level.txt\n'}
+[13.639828] (hri_comms) StdoutLine: {'line': b'writing ../../build/hri_comms/hri_comms.egg-info/PKG-INFO\n'}
+[13.641587] (hri_comms) StdoutLine: {'line': b'writing dependency_links to ../../build/hri_comms/hri_comms.egg-info/dependency_links.txt\n'}
+[13.644884] (hri_comms) StdoutLine: {'line': b'writing entry points to ../../build/hri_comms/hri_comms.egg-info/entry_points.txt\n'}
+[13.646337] (hri_comms) StdoutLine: {'line': b'writing requirements to ../../build/hri_comms/hri_comms.egg-info/requires.txt\n'}
+[13.647639] (hri_comms) StdoutLine: {'line': b'writing top-level names to ../../build/hri_comms/hri_comms.egg-info/top_level.txt\n'}
+[13.648887] (data_collection) StdoutLine: {'line': b"reading manifest file '../../build/data_collection/data_collection.egg-info/SOURCES.txt'\n"}
+[13.654446] (data_collection) StdoutLine: {'line': b"writing manifest file '../../build/data_collection/data_collection.egg-info/SOURCES.txt'\n"}
+[13.655429] (data_collection) StdoutLine: {'line': b'running build\n'}
+[13.656079] (data_collection) StdoutLine: {'line': b'running build_py\n'}
+[13.657557] (data_collection) StdoutLine: {'line': b'running install\n'}
+[13.659271] (hri_comms) StdoutLine: {'line': b"reading manifest file '../../build/hri_comms/hri_comms.egg-info/SOURCES.txt'\n"}
+[13.660052] (data_collection) StdoutLine: {'line': b'running install_lib\n'}
+[13.664853] (hri_comms) StdoutLine: {'line': b"writing manifest file '../../build/hri_comms/hri_comms.egg-info/SOURCES.txt'\n"}
+[13.665887] (hri_comms) StdoutLine: {'line': b'running build\n'}
+[13.666913] (hri_comms) StdoutLine: {'line': b'running build_py\n'}
+[13.667744] (data_collection) StdoutLine: {'line': b'running install_data\n'}
+[13.669254] (hri_comms) StdoutLine: {'line': b'running install\n'}
+[13.670790] (data_collection) StdoutLine: {'line': b'running install_egg_info\n'}
+[13.672025] (-) TimerEvent: {}
+[13.672763] (hri_comms) StdoutLine: {'line': b'running install_lib\n'}
+[13.679885] (hri_comms) StdoutLine: {'line': b'running install_data\n'}
+[13.681506] (data_collection) StdoutLine: {'line': b"removing '/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages/data_collection-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[13.682993] (hri_comms) StdoutLine: {'line': b'running install_egg_info\n'}
+[13.684114] (data_collection) StdoutLine: {'line': b'Copying ../../build/data_collection/data_collection.egg-info to /home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages/data_collection-0.0.0-py3.10.egg-info\n'}
+[13.694109] (data_collection) StdoutLine: {'line': b'running install_scripts\n'}
+[13.695179] (hri_comms) StdoutLine: {'line': b"removing '/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages/hri_comms-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[13.696646] (hri_comms) StdoutLine: {'line': b'Copying ../../build/hri_comms/hri_comms.egg-info to /home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages/hri_comms-0.0.0-py3.10.egg-info\n'}
+[13.706077] (hri_comms) StdoutLine: {'line': b'running install_scripts\n'}
+[13.707476] (my_robot_controller) StdoutLine: {'line': b'running egg_info\n'}
+[13.713118] (servo_controller) StdoutLine: {'line': b'running egg_info\n'}
+[13.714385] (my_robot_controller) StdoutLine: {'line': b'writing ../../build/my_robot_controller/my_robot_controller.egg-info/PKG-INFO\n'}
+[13.716692] (servo_controller) StdoutLine: {'line': b'writing ../../build/servo_controller/servo_controller.egg-info/PKG-INFO\n'}
+[13.718534] (servo_controller) StdoutLine: {'line': b'writing dependency_links to ../../build/servo_controller/servo_controller.egg-info/dependency_links.txt\n'}
+[13.721571] (my_robot_controller) StdoutLine: {'line': b'writing dependency_links to ../../build/my_robot_controller/my_robot_controller.egg-info/dependency_links.txt\n'}
+[13.722708] (servo_controller) StdoutLine: {'line': b'writing entry points to ../../build/servo_controller/servo_controller.egg-info/entry_points.txt\n'}
+[13.724015] (my_robot_controller) StdoutLine: {'line': b'writing entry points to ../../build/my_robot_controller/my_robot_controller.egg-info/entry_points.txt\n'}
+[13.724931] (my_robot_controller) StdoutLine: {'line': b'writing requirements to ../../build/my_robot_controller/my_robot_controller.egg-info/requires.txt\n'}
+[13.726317] (my_robot_controller) StdoutLine: {'line': b'writing top-level names to ../../build/my_robot_controller/my_robot_controller.egg-info/top_level.txt\n'}
+[13.728224] (servo_controller) StdoutLine: {'line': b'writing requirements to ../../build/servo_controller/servo_controller.egg-info/requires.txt\n'}
+[13.730822] (servo_controller) StdoutLine: {'line': b'writing top-level names to ../../build/servo_controller/servo_controller.egg-info/top_level.txt\n'}
+[13.738420] (my_robot_controller) StdoutLine: {'line': b"reading manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'\n"}
+[13.744206] (servo_controller) StdoutLine: {'line': b"reading manifest file '../../build/servo_controller/servo_controller.egg-info/SOURCES.txt'\n"}
+[13.746848] (my_robot_controller) StdoutLine: {'line': b"writing manifest file '../../build/my_robot_controller/my_robot_controller.egg-info/SOURCES.txt'\n"}
+[13.749360] (my_robot_controller) StdoutLine: {'line': b'running build\n'}
+[13.751427] (servo_controller) StdoutLine: {'line': b"writing manifest file '../../build/servo_controller/servo_controller.egg-info/SOURCES.txt'\n"}
+[13.752449] (my_robot_controller) StdoutLine: {'line': b'running build_py\n'}
+[13.753075] (servo_controller) StdoutLine: {'line': b'running build\n'}
+[13.753625] (servo_controller) StdoutLine: {'line': b'running build_py\n'}
+[13.754781] (servo_controller) StdoutLine: {'line': b'running install\n'}
+[13.755949] (my_robot_controller) StdoutLine: {'line': b'running install\n'}
+[13.756802] (servo_controller) StdoutLine: {'line': b'running install_lib\n'}
+[13.757518] (my_robot_controller) StdoutLine: {'line': b'running install_lib\n'}
+[13.763914] (servo_controller) StdoutLine: {'line': b'running install_data\n'}
+[13.765147] (my_robot_controller) StdoutLine: {'line': b'running install_data\n'}
+[13.767393] (servo_controller) StdoutLine: {'line': b'running install_egg_info\n'}
+[13.768523] (my_robot_controller) StdoutLine: {'line': b'running install_egg_info\n'}
+[13.772271] (-) TimerEvent: {}
+[13.779007] (servo_controller) StdoutLine: {'line': b"removing '/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages/servo_controller-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[13.780156] (my_robot_controller) StdoutLine: {'line': b"removing '/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[13.781374] (servo_controller) StdoutLine: {'line': b'Copying ../../build/servo_controller/servo_controller.egg-info to /home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages/servo_controller-0.0.0-py3.10.egg-info\n'}
+[13.782333] (my_robot_controller) StdoutLine: {'line': b'Copying ../../build/my_robot_controller/my_robot_controller.egg-info to /home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages/my_robot_controller-0.0.0-py3.10.egg-info\n'}
+[13.790233] (servo_controller) StdoutLine: {'line': b'running install_scripts\n'}
+[13.791561] (my_robot_controller) StdoutLine: {'line': b'running install_scripts\n'}
+[13.813337] (data_collection) StdoutLine: {'line': b'Installing csv_writer script to /home/rpi/ros2_ws/install/data_collection/lib/data_collection\n'}
+[13.816286] (data_collection) StdoutLine: {'line': b"writing list of installed files to '/home/rpi/ros2_ws/build/data_collection/install.log'\n"}
+[13.866108] (hri_comms) StdoutLine: {'line': b'Installing data_handler script to /home/rpi/ros2_ws/install/hri_comms/lib/hri_comms\n'}
+[13.870529] (hri_comms) StdoutLine: {'line': b'Installing udp_server script to /home/rpi/ros2_ws/install/hri_comms/lib/hri_comms\n'}
+[13.872559] (-) TimerEvent: {}
+[13.875405] (hri_comms) StdoutLine: {'line': b"writing list of installed files to '/home/rpi/ros2_ws/build/hri_comms/install.log'\n"}
+[13.969788] (servo_controller) StdoutLine: {'line': b'Installing actuate_servo script to /home/rpi/ros2_ws/install/servo_controller/lib/servo_controller\n'}
+[13.972961] (-) TimerEvent: {}
+[13.974610] (servo_controller) StdoutLine: {'line': b'Installing keyboard_input script to /home/rpi/ros2_ws/install/servo_controller/lib/servo_controller\n'}
+[13.977290] (servo_controller) StdoutLine: {'line': b"writing list of installed files to '/home/rpi/ros2_ws/build/servo_controller/install.log'\n"}
+[13.991379] (my_robot_controller) StdoutLine: {'line': b'Installing draw_circle script to /home/rpi/ros2_ws/install/my_robot_controller/lib/my_robot_controller\n'}
+[13.999212] (my_robot_controller) StdoutLine: {'line': b'Installing pose_subscriber script to /home/rpi/ros2_ws/install/my_robot_controller/lib/my_robot_controller\n'}
+[14.007394] (my_robot_controller) StdoutLine: {'line': b'Installing test_node script to /home/rpi/ros2_ws/install/my_robot_controller/lib/my_robot_controller\n'}
+[14.017733] (my_robot_controller) StdoutLine: {'line': b"writing list of installed files to '/home/rpi/ros2_ws/build/my_robot_controller/install.log'\n"}
+[14.073508] (-) TimerEvent: {}
+[14.128287] (data_collection) CommandEnded: {'returncode': 0}
+[14.175553] (-) TimerEvent: {}
+[14.279064] (-) TimerEvent: {}
+[14.381136] (-) TimerEvent: {}
+[14.481979] (-) TimerEvent: {}
+[14.559699] (data_collection) JobEnded: {'identifier': 'data_collection', 'rc': 0}
+[14.565193] (hri_comms) CommandEnded: {'returncode': 0}
+[14.582389] (-) TimerEvent: {}
+[14.683381] (-) TimerEvent: {}
+[14.784833] (-) TimerEvent: {}
+[14.847426] (hri_comms) JobEnded: {'identifier': 'hri_comms', 'rc': 0}
+[14.849929] (servo_controller) CommandEnded: {'returncode': 0}
+[14.885491] (-) TimerEvent: {}
+[14.988907] (-) TimerEvent: {}
+[15.090138] (-) TimerEvent: {}
+[15.129091] (servo_controller) JobEnded: {'identifier': 'servo_controller', 'rc': 0}
+[15.132176] (my_robot_controller) CommandEnded: {'returncode': 0}
+[15.190379] (-) TimerEvent: {}
+[15.291286] (-) TimerEvent: {}
+[15.392591] (-) TimerEvent: {}
+[15.413579] (my_robot_controller) JobEnded: {'identifier': 'my_robot_controller', 'rc': 0}
+[15.416860] (actuators) JobStarted: {'identifier': 'actuators'}
+[15.492937] (-) TimerEvent: {}
+[15.593625] (-) TimerEvent: {}
+[15.694621] (-) TimerEvent: {}
+[15.796435] (-) TimerEvent: {}
+[15.859535] (robot_arm_controller) JobStarted: {'identifier': 'robot_arm_controller'}
+[15.896596] (-) TimerEvent: {}
+[16.000366] (-) TimerEvent: {}
+[16.101535] (-) TimerEvent: {}
+[16.204444] (-) TimerEvent: {}
+[16.305508] (-) TimerEvent: {}
+[16.409444] (-) TimerEvent: {}
+[16.510179] (-) TimerEvent: {}
+[16.611058] (-) TimerEvent: {}
+[16.711754] (-) TimerEvent: {}
+[16.812408] (-) TimerEvent: {}
+[16.913073] (-) TimerEvent: {}
+[17.013771] (-) TimerEvent: {}
+[17.114439] (-) TimerEvent: {}
+[17.215143] (-) TimerEvent: {}
+[17.315793] (-) TimerEvent: {}
+[17.416482] (-) TimerEvent: {}
+[17.517250] (-) TimerEvent: {}
+[17.618383] (-) TimerEvent: {}
+[17.719286] (-) TimerEvent: {}
+[17.820444] (-) TimerEvent: {}
+[17.922789] (-) TimerEvent: {}
+[18.023439] (-) TimerEvent: {}
+[18.124564] (-) TimerEvent: {}
+[18.225426] (-) TimerEvent: {}
+[18.326143] (-) TimerEvent: {}
+[18.426849] (-) TimerEvent: {}
+[18.527545] (-) TimerEvent: {}
+[18.628250] (-) TimerEvent: {}
+[18.728906] (-) TimerEvent: {}
+[18.829585] (-) TimerEvent: {}
+[18.930238] (-) TimerEvent: {}
+[19.030938] (-) TimerEvent: {}
+[19.131571] (-) TimerEvent: {}
+[19.232256] (-) TimerEvent: {}
+[19.332979] (-) TimerEvent: {}
+[19.433700] (-) TimerEvent: {}
+[19.534585] (-) TimerEvent: {}
+[19.635666] (-) TimerEvent: {}
+[19.736476] (-) TimerEvent: {}
+[19.837684] (-) TimerEvent: {}
+[19.938899] (-) TimerEvent: {}
+[20.039640] (-) TimerEvent: {}
+[20.140510] (-) TimerEvent: {}
+[20.241668] (-) TimerEvent: {}
+[20.342877] (-) TimerEvent: {}
+[20.443782] (-) TimerEvent: {}
+[20.544618] (-) TimerEvent: {}
+[20.645455] (-) TimerEvent: {}
+[20.746256] (-) TimerEvent: {}
+[20.847072] (-) TimerEvent: {}
+[20.947898] (-) TimerEvent: {}
+[21.048685] (-) TimerEvent: {}
+[21.149552] (-) TimerEvent: {}
+[21.250393] (-) TimerEvent: {}
+[21.351260] (-) TimerEvent: {}
+[21.452204] (-) TimerEvent: {}
+[21.553083] (-) TimerEvent: {}
+[21.653997] (-) TimerEvent: {}
+[21.755035] (-) TimerEvent: {}
+[21.857218] (-) TimerEvent: {}
+[21.956568] (actuators) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/actuators', 'build', '--build-base', '/home/rpi/ros2_ws/build/actuators/build', 'install', '--record', '/home/rpi/ros2_ws/build/actuators/install.log', '--single-version-externally-managed'], 'cwd': '/home/rpi/ros2_ws/src/actuators', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_CA:en', 'USER': 'rpi', 'SSH_CLIENT': '130.63.250.163 64232 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/rpi', 'OLDPWD': '/home/rpi', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/rpi/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'rpi', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm', 'XDG_SESSION_ID': '6', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/rpi/ros2_ws/install/hri_comms:/home/rpi/ros2_ws/install/servo_controller:/home/rpi/ros2_ws/install/robot_arm_controller:/home/rpi/ros2_ws/install/my_robot_controller:/home/rpi/ros2_ws/install/actuators:/home/rpi/ros2_ws/install/data_collection:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/rpi/ros2_ws/build/actuators', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '130.63.250.163 64232 130.63.213.137 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/rpi/ros2_ws/build/actuators/prefix_override:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[21.964221] (-) TimerEvent: {}
+[21.971222] (robot_arm_controller) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../../build/robot_arm_controller', 'build', '--build-base', '/home/rpi/ros2_ws/build/robot_arm_controller/build', 'install', '--record', '/home/rpi/ros2_ws/build/robot_arm_controller/install.log', '--single-version-externally-managed'], 'cwd': '/home/rpi/ros2_ws/src/robot_arm_controller', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'LANGUAGE': 'en_CA:en', 'USER': 'rpi', 'SSH_CLIENT': '130.63.250.163 64232 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'MOTD_SHOWN': 'pam', 'HOME': '/home/rpi', 'OLDPWD': '/home/rpi', 'SSH_TTY': '/dev/pts/1', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLCON_PREFIX_PATH': '/home/rpi/ros2_ws/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'rpi', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm', 'XDG_SESSION_ID': '6', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'AMENT_PREFIX_PATH': '/home/rpi/ros2_ws/install/hri_comms:/home/rpi/ros2_ws/install/servo_controller:/home/rpi/ros2_ws/install/robot_arm_controller:/home/rpi/ros2_ws/install/my_robot_controller:/home/rpi/ros2_ws/install/actuators:/home/rpi/ros2_ws/install/data_collection:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/rpi/ros2_ws/build/robot_arm_controller', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '130.63.250.163 64232 130.63.213.137 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/rpi/ros2_ws/build/robot_arm_controller/prefix_override:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/hri_comms/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/servo_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/my_robot_controller/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages:/home/rpi/ros2_ws/install/data_collection/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[22.064404] (-) TimerEvent: {}
+[22.165545] (-) TimerEvent: {}
+[22.266720] (-) TimerEvent: {}
+[22.368102] (-) TimerEvent: {}
+[22.469189] (-) TimerEvent: {}
+[22.571752] (-) TimerEvent: {}
+[22.672820] (-) TimerEvent: {}
+[22.773883] (-) TimerEvent: {}
+[22.874994] (-) TimerEvent: {}
+[22.976068] (-) TimerEvent: {}
+[23.077097] (-) TimerEvent: {}
+[23.178210] (-) TimerEvent: {}
+[23.279665] (-) TimerEvent: {}
+[23.380430] (-) TimerEvent: {}
+[23.458842] (actuators) StdoutLine: {'line': b'running egg_info\n'}
+[23.461716] (actuators) StdoutLine: {'line': b'writing ../../build/actuators/actuators.egg-info/PKG-INFO\n'}
+[23.462585] (robot_arm_controller) StdoutLine: {'line': b'running egg_info\n'}
+[23.463359] (actuators) StdoutLine: {'line': b'writing dependency_links to ../../build/actuators/actuators.egg-info/dependency_links.txt\n'}
+[23.464240] (actuators) StdoutLine: {'line': b'writing entry points to ../../build/actuators/actuators.egg-info/entry_points.txt\n'}
+[23.465373] (actuators) StdoutLine: {'line': b'writing requirements to ../../build/actuators/actuators.egg-info/requires.txt\n'}
+[23.466287] (robot_arm_controller) StdoutLine: {'line': b'writing ../../build/robot_arm_controller/robot_arm_controller.egg-info/PKG-INFO\n'}
+[23.467400] (actuators) StdoutLine: {'line': b'writing top-level names to ../../build/actuators/actuators.egg-info/top_level.txt\n'}
+[23.468160] (robot_arm_controller) StdoutLine: {'line': b'writing dependency_links to ../../build/robot_arm_controller/robot_arm_controller.egg-info/dependency_links.txt\n'}
+[23.469799] (robot_arm_controller) StdoutLine: {'line': b'writing entry points to ../../build/robot_arm_controller/robot_arm_controller.egg-info/entry_points.txt\n'}
+[23.470743] (robot_arm_controller) StdoutLine: {'line': b'writing requirements to ../../build/robot_arm_controller/robot_arm_controller.egg-info/requires.txt\n'}
+[23.471485] (robot_arm_controller) StdoutLine: {'line': b'writing top-level names to ../../build/robot_arm_controller/robot_arm_controller.egg-info/top_level.txt\n'}
+[23.478073] (actuators) StdoutLine: {'line': b"reading manifest file '../../build/actuators/actuators.egg-info/SOURCES.txt'\n"}
+[23.480583] (-) TimerEvent: {}
+[23.481636] (robot_arm_controller) StdoutLine: {'line': b"reading manifest file '../../build/robot_arm_controller/robot_arm_controller.egg-info/SOURCES.txt'\n"}
+[23.482564] (actuators) StdoutLine: {'line': b"writing manifest file '../../build/actuators/actuators.egg-info/SOURCES.txt'\n"}
+[23.483297] (actuators) StdoutLine: {'line': b'running build\n'}
+[23.483928] (actuators) StdoutLine: {'line': b'running build_py\n'}
+[23.485436] (actuators) StdoutLine: {'line': b'running install\n'}
+[23.486654] (robot_arm_controller) StdoutLine: {'line': b"writing manifest file '../../build/robot_arm_controller/robot_arm_controller.egg-info/SOURCES.txt'\n"}
+[23.487584] (actuators) StdoutLine: {'line': b'running install_lib\n'}
+[23.488112] (robot_arm_controller) StdoutLine: {'line': b'running build\n'}
+[23.488614] (robot_arm_controller) StdoutLine: {'line': b'running build_py\n'}
+[23.490030] (robot_arm_controller) StdoutLine: {'line': b'copying robot_arm_controller/global_robot_ctrl.py -> /home/rpi/ros2_ws/build/robot_arm_controller/build/lib/robot_arm_controller\n'}
+[23.492460] (robot_arm_controller) StdoutLine: {'line': b'running install\n'}
+[23.493730] (actuators) StdoutLine: {'line': b'running install_data\n'}
+[23.494375] (robot_arm_controller) StdoutLine: {'line': b'running install_lib\n'}
+[23.496601] (actuators) StdoutLine: {'line': b'running install_egg_info\n'}
+[23.498996] (robot_arm_controller) StdoutLine: {'line': b'copying /home/rpi/ros2_ws/build/robot_arm_controller/build/lib/robot_arm_controller/global_robot_ctrl.py -> /home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages/robot_arm_controller\n'}
+[23.504106] (robot_arm_controller) StdoutLine: {'line': b'byte-compiling /home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages/robot_arm_controller/global_robot_ctrl.py to global_robot_ctrl.cpython-310.pyc\n'}
+[23.505369] (actuators) StdoutLine: {'line': b"removing '/home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages/actuators-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[23.507552] (actuators) StdoutLine: {'line': b'Copying ../../build/actuators/actuators.egg-info to /home/rpi/ros2_ws/install/actuators/lib/python3.10/site-packages/actuators-0.0.0-py3.10.egg-info\n'}
+[23.510068] (robot_arm_controller) StdoutLine: {'line': b'running install_data\n'}
+[23.512845] (robot_arm_controller) StdoutLine: {'line': b'running install_egg_info\n'}
+[23.515069] (actuators) StdoutLine: {'line': b'running install_scripts\n'}
+[23.522002] (robot_arm_controller) StdoutLine: {'line': b"removing '/home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages/robot_arm_controller-0.0.0-py3.10.egg-info' (and everything under it)\n"}
+[23.524130] (robot_arm_controller) StdoutLine: {'line': b'Copying ../../build/robot_arm_controller/robot_arm_controller.egg-info to /home/rpi/ros2_ws/install/robot_arm_controller/lib/python3.10/site-packages/robot_arm_controller-0.0.0-py3.10.egg-info\n'}
+[23.531739] (robot_arm_controller) StdoutLine: {'line': b'running install_scripts\n'}
+[23.580794] (-) TimerEvent: {}
+[23.611941] (actuators) StdoutLine: {'line': b'Installing head_tracking script to /home/rpi/ros2_ws/install/actuators/lib/actuators\n'}
+[23.613909] (actuators) StdoutLine: {'line': b"writing list of installed files to '/home/rpi/ros2_ws/build/actuators/install.log'\n"}
+[23.637363] (robot_arm_controller) StdoutLine: {'line': b'Installing global_robot_ctrl script to /home/rpi/ros2_ws/install/robot_arm_controller/lib/robot_arm_controller\n'}
+[23.639074] (robot_arm_controller) StdoutLine: {'line': b'Installing hand_coord_controller script to /home/rpi/ros2_ws/install/robot_arm_controller/lib/robot_arm_controller\n'}
+[23.640678] (robot_arm_controller) StdoutLine: {'line': b'Installing hand_tracking_ee_ctrl script to /home/rpi/ros2_ws/install/robot_arm_controller/lib/robot_arm_controller\n'}
+[23.642373] (robot_arm_controller) StdoutLine: {'line': b'Installing key_ee_ctrl script to /home/rpi/ros2_ws/install/robot_arm_controller/lib/robot_arm_controller\n'}
+[23.643769] (robot_arm_controller) StdoutLine: {'line': b'Installing keyboard_coord_controller script to /home/rpi/ros2_ws/install/robot_arm_controller/lib/robot_arm_controller\n'}
+[23.645248] (robot_arm_controller) StdoutLine: {'line': b'Installing variable_gripper_controller script to /home/rpi/ros2_ws/install/robot_arm_controller/lib/robot_arm_controller\n'}
+[23.649224] (robot_arm_controller) StdoutLine: {'line': b"writing list of installed files to '/home/rpi/ros2_ws/build/robot_arm_controller/install.log'\n"}
+[23.681220] (-) TimerEvent: {}
+[23.782972] (-) TimerEvent: {}
+[23.813283] (actuators) CommandEnded: {'returncode': 0}
+[23.883087] (-) TimerEvent: {}
+[23.984328] (-) TimerEvent: {}
+[24.085564] (-) TimerEvent: {}
+[24.107071] (actuators) JobEnded: {'identifier': 'actuators', 'rc': 0}
+[24.111188] (robot_arm_controller) CommandEnded: {'returncode': 0}
+[24.186064] (-) TimerEvent: {}
+[24.290009] (-) TimerEvent: {}
+[24.390925] (-) TimerEvent: {}
+[24.392809] (robot_arm_controller) JobEnded: {'identifier': 'robot_arm_controller', 'rc': 0}
+[24.396199] (-) EventReactorShutdown: {}

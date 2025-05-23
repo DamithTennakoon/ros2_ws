@@ -8,6 +8,44 @@ from pymycobot.genre import Angle
 from pymycobot import PI_PORT, PI_BAUD
 import time
 
+# Import computational libraries
+import math
+import numpy as np
+from scipy.spatial.transform import Rotation as R
+
+# Function - compute the yaw angle required to align end effector eith the robot's joint 0 motor 
+def yaw_axis_alignment(current_pose, offset):
+    p1_x = current_pose[0] # Parse the x,y coordinates
+    p1_y = current_pose[1]
+    beta = math.atan(-1*p1_x/p1_y) # Compute the immediate angle, radians
+    p2_x = p1_x - offset * math.cos(beta) # Compute the x-component due to the offset
+    p2_y = p1_y - offset * math.sin(beta) # Compute the y-component due to the offset
+    yaw_angle_degrees = math.degrees(math.atan(-p2_x/p2_y)) + 90.0 # Compute actual immediate angle and account for offset angle, degrees
+    return yaw_angle_degrees
+
+# Function - convert all angles between 0-360
+def to_positive_angle(angle):
+    angle = angle % 360
+    if angle >= 180:
+        angle -= 360
+    return angle
+
+# Function - position deadband
+def is_significant_change(new_position, pre_position, pos_thresh = 2.0):
+    magnitude = math.sqrt((new_position[0]-pre_position[0])**2 + (new_position[1]-pre_position[1])**2 + (new_position[2]-pre_position[2])**2)
+    if (magnitude >= pos_thresh):
+        return True
+    else:
+        return False
+    
+# Function - orientation deadband
+def is_signicant_rotation(new_rotation, pre_rotation, angle_thresh = 2.0):
+    magnitude = math.sqrt((new_rotation[0]-pre_rotation[0])**2 + (new_rotation[1]-pre_rotation[1])**2 + (new_rotation[2]-pre_rotation[2])**2)
+    if (magnitude >= angle_thresh):
+        return True
+    else:
+        return False
+
 class GlobalRobotCtrl(Node):
 
     def __init__(self):
@@ -24,10 +62,8 @@ class GlobalRobotCtrl(Node):
         self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
         self._mc.set_color(255, 0, 0)
         time.sleep(0.5)
-        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 10) # Move to initialize position 1 using joint controller method
-        time.sleep(10)
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
-        time.sleep(10)
+        time.sleep(5)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
@@ -38,7 +74,7 @@ class GlobalRobotCtrl(Node):
         self.raw_data_subscriber = self.create_subscription(String, 'raw_input_data', self.store_raw_data, 10)
 
         # Create/execute callback functions
-        self._move_robot_timer = self.create_timer(0.001, self.move_robot_arm) # DEFAULT: 0.005
+        self._move_robot_timer = self.create_timer(0.1, self.move_robot_arm) # DEFAULT: 0.1
         self._retrieve_joint_angles = self.create_timer(0.01, self.retrieve_joint_angles)
 
         # Define variables for local data storage 
@@ -47,19 +83,72 @@ class GlobalRobotCtrl(Node):
         self._incr_pos = 2.0 # DEF -> 0.5 -> 1 -> 1.3 ->LAST CHANGE 0.8
         self._joint_0_angle = self._cur_position[0]
         self._prev_joint_6_angle = self._cur_position[5] 
+        self._target_position = [0.0, 0.0, 0.0]
+        self._target_rotation = [0.0, 0.0, 0.0, 0.0] # qx, qy, qz, qw
+        self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
+        self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
+        self._move_speed = 30 # Arm movement speed in mm/s (defualt 25mm/s)
+        self._command_delay = 0.015 # Delay after transmitting motion command (default 0.04s)
 
     # Define callback function to store topic data into internal variables
     def store_raw_data(self, msg):
         self._input_key = msg.data
-        print(f"RAW DATA: {self._input_key}")
+        
+        if (msg.data[:3] == "GRC"):
+            split_string_list = msg.data.split(',') # Seperate the string using csv format
+            # Convert and store the data 
+            for i in range(len(self._target_position)):
+                self._target_position[i] = float(split_string_list[i+1]) 
+            for j in range(len(self._target_rotation)):
+                self._target_rotation[j] = float(split_string_list[j+4])
+                
 
     # Define a callback function to translate the robot arm's end effector in coordinate space
     def move_robot_arm(self):
-        pass
+        # Send position data to robot arm
+        if (((self._target_position[0]**2)+(self._target_position[1]**2)+(self._target_position[2]**2)) > 0.0):
+            old_position = [self._cur_position[0], self._cur_position[1], self._cur_position[2]]
+            old_rotation = [self._cur_position[3], self._cur_position[4], self._cur_position[5]]
+
+            self._cur_position[0] = self._target_position[2] * 1000
+            self._cur_position[1] = self._target_position[0] * -1000
+            self._cur_position[2] = self._target_position[1] * 1000
+            self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
+
+            new_position = [self._target_position[2] * 1000, self._target_position[0] * -1000, self._target_position[1] * 1000]
+
+            
+            r = R.from_quat(self._target_rotation)
+            euler_angles = r.as_euler('xyz', degrees=True)  # returns roll, pitch, yaw in degrees
+            roll, pitch, yaw = euler_angles
+
+            roll_r = to_positive_angle(roll + self._cur_position[3])
+            pitch_r = to_positive_angle(yaw + self._cur_position[4])
+            yaw_r = to_positive_angle(-pitch + self._cur_position[5])
+
+            new_rotation = [roll_r, pitch_r, yaw_r]
+
+            # Logging
+            #print(f"Target poistion in mm: {self._cur_position[0:4]}")
+            #print(f"Target rotation: {self._target_rotation}")
+            print(f"Euler Angles: {roll_r, pitch_r, yaw_r}")
+            # Serial communications
+            #self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
+            
+            if (is_significant_change(new_position, old_position) or is_signicant_rotation(new_rotation, old_rotation)):
+                self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1)
+            #self._mc.send_coords([self._cur_position[0], self._cur_position[1], self._cur_position[2], roll_r, pitch_r, yaw_r], self._move_speed, 1) #  Testing orientation - fixed position
+            #time.sleep(self._command_delay) # Delay to move arm to position
 
     # Define a callback function to retrive and store the angle of joint 0
     def retrieve_joint_angles(self):
-        pass
+        # Retrieve joint angle data
+        joint_angles_msg = Float64MultiArray()
+        cur_angles = self._mc.get_angles()
+        joint_angles_msg.data = cur_angles
+
+        # Publish the data to the topic
+        self._publish_robot_joint_angles.publish(joint_angles_msg)
 
 def main(args=None):
     try:
