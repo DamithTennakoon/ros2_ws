@@ -105,6 +105,10 @@ class FpvGlobalCtrl(Node):
     def move_robot_arm(self):
         pass
 
+    # Define a callback function to retrive and store the angle of joint 0
+    def retrieve_joint_angles(self):
+        pass
+
 # Create main method for looping the ROS node
 def main(args=None):
     try:
