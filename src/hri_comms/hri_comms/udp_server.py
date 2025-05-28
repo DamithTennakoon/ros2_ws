@@ -63,7 +63,7 @@ class UdpServer(Node):
     def parse_pose_data(self, msg):
         pose_string = [str(value) for value in msg.data] # Convert float values to a stringed array
         pose_string.insert(0, self._pose_datacode) # Insert the pose data code
-        self._tx_data = pose_string # Set the transmit message variable to the pose data string 
+        self._tx_data = ','.join(pose_string) # Set the transmit message variable to the pose data string seperated with a comma 
 
 def main (args=None):
     rclpy.init(args=args)
