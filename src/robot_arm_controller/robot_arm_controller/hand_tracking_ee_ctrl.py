@@ -140,8 +140,10 @@ class HandTrackingEECtrl(Node):
     
     # Callback method - retrieve the robot arms end effector pose and publish them to a topic
     def tx_robot_arm(self):
-        pass
-
+        # Define the data type and msg variable, retrieve the pose, and store into publisher variable
+        pose_msg = Float64MultiArray()
+        pose_msg = self._mc.get_coords()
+        self._publish_robot_pose.publish(pose_msg)
 
 # Create main method for looping the ROS node
 def main(args=None):

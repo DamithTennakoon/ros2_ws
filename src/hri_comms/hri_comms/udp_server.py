@@ -27,9 +27,13 @@ class UdpServer(Node):
 
         # Consutrct a subsriber object to subscribe to robot arm's joint angles data from the topic "robot_joint_angles" 
         self._robot_joint_angles_data = self.create_subscription(Float64MultiArray, 'robot_joint_angles', self.parse_joint_angle_data, 10)
+        self._robot_pose_data = self.create_subscription(Float64MultiArray, 'robot_pose', self.parse_pose_data, 10)
 
         # Construct a timer to execute the rx_tx_server callback function every millisecond
         self.create_timer(0.001, self.rx_tx_server)
+
+        # Define user parameters
+        self._pose_datacode = "POSE"
         
     def rx_tx_server(self):
         # Store the received data and the client ip adress and decode the received message
@@ -55,68 +59,14 @@ class UdpServer(Node):
         # Concatonate string array into a single variable
         self._tx_data = ','.join(joint_angles_string)
 
+    # Define a method to convert robot pose topic data into a tranmittable string
+    def parse_pose_data(self, msg):
+        pose_string = [str(value) for value in msg.data] # Convert float values to a stringed array
+        pose_string.insert(0, self._pose_datacode) # Insert the pose data code
+        self._tx_data = pose_string # Set the transmit message variable to the pose data string 
 
 def main (args=None):
     rclpy.init(args=args)
     node = UdpServer()
     rclpy.spin(node)
     rclpy.shutdown()
-
-'''
-# Import libs
-import socket
-from pymycobot.mycobot import MyCobot
-from pymycobot.genre import Angle
-from pymycobot import PI_PORT, PI_BAUD
-import time
-
-# Initialize robot arm paramaters
-mc = MyCobot("/dev/ttyACM0", 115200)
-#mc.send_angles([0, 0, 0, 0, 0, 0], 40)
-time.sleep(5)
-position = mc.get_coords() # [x, y, z]
-
-# Initialize UDP server parameters
-dataTX = "ROS2"
-dataRX = ""
-bufferSize = 1024 
-ServerPort = 2222
-ServerIP = '130.63.230.194'
-
-# Initialize UDP server
-RPIsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-RPIsocket.bind((ServerIP, ServerPort))
-print("Waiting for client to connect...")
-
-# Continous TX/RX
-while (True):
-    # Store and decode received message + IP
-    dataRX, clientIP = RPIsocket.recvfrom(bufferSize)
-    dataRX = dataRX.decode('utf-8')
-    #print("RX: ", dataRX)
-
-    # Update position vector
-    if (dataRX == "FORWARD"):
-        position[0] += 0.1
-    elif (dataRX == "BACKWARD"):
-        position[0] -= 0.1
-    elif (dataRX == "RIGHT"):
-        position[1] += 0.1
-    elif (dataRX == "LEFT"):
-        position[1] -= 0.1
-    elif (dataRX == "UP"):
-        position[2] += 0.1
-    elif (dataRX == "DOWN"):
-        position[2] -= 0.1
-    else:
-        position = position
-
-    #mc.send_coords([round(position[0], 1), round(position[1], 1), position[2], position[3], position[4], position[5]], 30, 0)
-    mc.send_coords(position, 30, 1)
-    print(position)
-    time.sleep(0.001)
-
-    # Transmit data to server
-    bytesDataTX = dataTX.encode('utf-8')
-    RPIsocket.sendto(bytesDataTX, clientIP)
-'''
