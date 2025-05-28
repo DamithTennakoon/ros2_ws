@@ -58,10 +58,8 @@ class HandTrackingEECtrl(Node):
         self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
         self._mc.set_color(255, 0, 0)
         time.sleep(0.5)
-        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 10) # Move to initialize position 1 using joint controller method
-        time.sleep(10)
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
-        time.sleep(10)
+        time.sleep(5)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
         self._mc.set_gripper_value(20, 50) # Nearly close gripper
@@ -96,6 +94,7 @@ class HandTrackingEECtrl(Node):
 
         # Create and excute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
+        self._tx_robot_params = self.create_timer(0.1, self.tx_robot_arm)
     
     # Event Handler method - parse and store the HTC received data
     def parse_raw_data(self, msg):
@@ -138,6 +137,11 @@ class HandTrackingEECtrl(Node):
                     self._mc.set_gripper_value(self._gripper_close, self._gripper_speed) # Close gripper command
                     time.sleep(self._gripper_delay)
                 self._prev_gripper_state = self._cur_gripper_state # Sync the two states
+    
+    # Callback method - retrieve the robot arms end effector pose and publish them to a topic
+    def tx_robot_arm(self):
+        pass
+
 
 # Create main method for looping the ROS node
 def main(args=None):
