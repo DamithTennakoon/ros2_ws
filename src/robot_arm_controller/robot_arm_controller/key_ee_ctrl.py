@@ -86,7 +86,7 @@ class KeyEECtrl(Node):
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
-
+        self._tx_robot_params = self.create_timer(0.1, self.tx_robot_arm)
 
     # Event Handler method - store the raw User Input Segment's keyboard data, locally
     def store_raw_data(self, msg):
@@ -131,6 +131,13 @@ class KeyEECtrl(Node):
             time.sleep(self._gripper_delay)
         else:
             self._cur_position = self._cur_position
+
+    # Callback method - retrieve the robot arms end effector pose and publish them to a topic
+    def tx_robot_arm(self):
+        # Define the data type and msg variable, retrieve the pose, and store into publisher variable
+        pose_msg = Float64MultiArray()
+        pose_msg.data = self._mc.get_coords()
+        self._publish_robot_pose.publish(pose_msg)
 
 # Create main method for looping the ROS node
 def main(args=None):

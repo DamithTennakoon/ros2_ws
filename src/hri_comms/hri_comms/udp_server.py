@@ -59,7 +59,7 @@ class UdpServer(Node):
         # Concatonate string array into a single variable
         self._tx_data = ','.join(joint_angles_string)
 
-    # Define a method to convert robot pose topic data into a tranmittable string
+    # Define a method to convert robot pose topic data into a transmittable string
     def parse_pose_data(self, msg):
         pose_string = [str(value) for value in msg.data] # Convert float values to a stringed array
         pose_string.insert(0, self._pose_datacode) # Insert the pose data code
