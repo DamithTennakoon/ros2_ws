@@ -80,7 +80,7 @@ class KeyEECtrl(Node):
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
-        #self._tx_robot_params = self.create_timer(0.1, self.tx_robot_arm)
+        self._tx_robot_params = self.create_timer(0.1, self.tx_robot_arm)
 
     # Event Handler method - store the raw User Input Segment's keyboard data, locally
     def store_raw_data(self, msg):
