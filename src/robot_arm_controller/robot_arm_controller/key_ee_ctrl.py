@@ -55,16 +55,10 @@ class KeyEECtrl(Node):
         self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
         self._mc.set_color(255, 0, 0)
         time.sleep(0.5)
-        self._mc.send_angles([110, 63.8, 38.67, -20, -88.59, 90], 10) # Move to initialize position 1 using joint controller method
-        time.sleep(10)
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
-        time.sleep(10)
+        time.sleep(5)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
-        self._mc.set_gripper_value(20, 50) # Nearly close gripper
-        time.sleep(3)
-        self._mc.set_gripper_value(100, 50) # Open Gripper
-        time.sleep(3)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
         # Create Publisher/Subscriber objects
@@ -75,7 +69,7 @@ class KeyEECtrl(Node):
         # Define variables for local data storage 
         self._input_key = "NONE" # Received string message of the keyboard input
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
-        self._incr_pos = 1.0 # Position increment for EE
+        self._incr_pos = 2.0 # Position increment for EE
         self._command_delay = 0.04 # Delay after transmitting motion command
         self._move_speed = 25 # Arm movement speed in mm/s
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
@@ -86,7 +80,7 @@ class KeyEECtrl(Node):
 
         # Create/execute callback functions
         self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
-        self._tx_robot_params = self.create_timer(0.1, self.tx_robot_arm)
+        #self._tx_robot_params = self.create_timer(0.1, self.tx_robot_arm)
 
     # Event Handler method - store the raw User Input Segment's keyboard data, locally
     def store_raw_data(self, msg):
