@@ -44,6 +44,7 @@ class UdpServer(Node):
         self.get_logger().info(f"RX: {self._rx_data}")
 
         # Transmit a message to the client
+        self._tx_data = "SENDING DATA"
         self._udp_server.sendto(self._tx_data.encode('utf-8'), self._client_ip)
 
         # Debug to the console the transmitted data
@@ -60,7 +61,7 @@ class UdpServer(Node):
         joint_angles_string = [str(value) for value in msg.data]
 
         # Concatonate string array into a single variable
-        #self._tx_data = ','.join(joint_angles_string)
+        self._tx_data = ','.join(joint_angles_string)
 
     # Define a method to convert robot pose topic data into a transmittable string
     def parse_pose_data(self, msg):
