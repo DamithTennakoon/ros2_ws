@@ -44,7 +44,6 @@ class UdpServer(Node):
         self.get_logger().info(f"RX: {self._rx_data}")
 
         # Transmit a message to the client
-        self._tx_data = "SENDING DATA"
         self._udp_server.sendto(self._tx_data.encode('utf-8'), self._client_ip)
 
         # Debug to the console the transmitted data
@@ -68,6 +67,7 @@ class UdpServer(Node):
         pose_string = [str(value) for value in msg.data] # Convert float values to a stringed array
         pose_string.insert(0, self._pose_datacode) # Insert the pose data code
         self._tx_data = ','.join(pose_string) # Set the transmit message variable to the pose data string seperated with a comma 
+        self._tx_data = "SENDING DATA INTERNAL"
 
 def main (args=None):
     rclpy.init(args=args)
