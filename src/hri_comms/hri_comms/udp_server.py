@@ -46,6 +46,9 @@ class UdpServer(Node):
         # Transmit a message to the client
         self._udp_server.sendto(self._tx_data.encode('utf-8'), self._client_ip)
 
+        # Debug to the console the transmitted data
+        self.get_logger().info(f"TX: {self._tx_data}")
+
         # Publish raw input data
         msg = String()
         msg.data = self._rx_data
