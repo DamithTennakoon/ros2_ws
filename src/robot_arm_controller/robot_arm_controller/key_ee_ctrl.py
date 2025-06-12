@@ -79,8 +79,8 @@ class KeyEECtrl(Node):
         self._gripper_delay = 1.0 # Delay after transmitting gripper command
 
         # Create/execute callback functions
-        self._move_robot_timer = self.create_timer(0.1, self.move_robot_arm)
-        self._tx_robot_params = self.create_timer(0.01, self.tx_robot_arm)
+        self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
+        self._tx_robot_params = self.create_timer(0.2, self.tx_robot_arm)
 
     # Event Handler method - store the raw User Input Segment's keyboard data, locally
     def store_raw_data(self, msg):
