@@ -130,9 +130,11 @@ class KeyEECtrl(Node):
     def tx_robot_arm(self):
         # Define the data type and msg variable, retrieve the pose, and store into publisher variable
         pose_msg = Float64MultiArray()
-        pose_msg.data = self._mc.get_coords()
+        robot_coords = self._mc.get_coords()
+        pose_msg.data = robot_coords
         self._publish_robot_pose.publish(pose_msg)
-        
+        #self.get_logger().info(f"PUBLISH: {pose_msg.data}")
+
 # Create main method for looping the ROS node
 def main(args=None):
     try:
