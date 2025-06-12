@@ -30,7 +30,7 @@ class UdpServer(Node):
         self._robot_pose_data = self.create_subscription(Float64MultiArray, 'robot_pose', self.parse_pose_data, 10)
 
         # Construct a timer to execute the rx_tx_server callback function every millisecond
-        self.create_timer(0.001, self.rx_tx_server)
+        self.create_timer(0.01, self.rx_tx_server) # working at 0.001 before
 
         # Define user parameters
         self._pose_datacode = "POSE"
