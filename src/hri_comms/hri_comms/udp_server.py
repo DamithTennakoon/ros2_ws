@@ -65,7 +65,7 @@ class UdpServer(Node):
         pose_string = [str(value) for value in msg.data] # Convert float values to a stringed array
 
         # DEBUG
-        self._tx_data = ','.join(pose_string)
+        self._tx_data = self._pose_datacode + ','.join(pose_string)
         # --
         #pose_string.insert(0, self._pose_datacode) # Insert the pose data code
         #self._tx_data = ','.join(pose_string) # Set the transmit message variable to the pose data string seperated with a comma 
