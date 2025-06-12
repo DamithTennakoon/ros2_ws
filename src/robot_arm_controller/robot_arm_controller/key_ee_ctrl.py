@@ -134,8 +134,8 @@ class KeyEECtrl(Node):
         #robot_coords = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         #for i in range(len(raw_coords)):
         #    robot_coords[i] = raw_coords[i]
-        #pose_msg.data = self._mc.get_coords()
-        pose_msg.data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        pose_msg.data = self._mc.get_coords()
+        #pose_msg.data = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         self._publish_robot_pose.publish(pose_msg)
         self.get_logger().info(f"PUBLISH: {pose_msg.data}")
 
