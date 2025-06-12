@@ -68,8 +68,9 @@ class UdpServer(Node):
         for i in range(len(pose_string)):
             self._tx_data += "," + pose_string[i]
 
+        self._tx_data = ','.join(pose_string) + ',' + self._pose_datacode # Set the transmit message variable to the pose data string seperated with a comma 
         self.get_logger().info(f"TX: {self._tx_data}")
-        #self._tx_data = ','.join(pose_string) + ',' + self._pose_datacode # Set the transmit message variable to the pose data string seperated with a comma 
+
 
 def main (args=None):
     rclpy.init(args=args)
