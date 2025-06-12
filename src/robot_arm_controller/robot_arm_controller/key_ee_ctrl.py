@@ -134,6 +134,7 @@ class KeyEECtrl(Node):
         arr = [1.111, 2.222, 3.333]
         pose_msg.data = arr
         self._publish_robot_pose.publish(pose_msg)
+        self.get_logger().info(f"PUBLISH: {pose_msg.data}")
 
 # Create main method for looping the ROS node
 def main(args=None):
