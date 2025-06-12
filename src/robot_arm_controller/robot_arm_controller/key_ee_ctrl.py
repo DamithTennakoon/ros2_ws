@@ -69,7 +69,7 @@ class KeyEECtrl(Node):
         # Define variables for local data storage 
         self._input_key = "NONE" # Received string message of the keyboard input
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
-        self._incr_pos = 1.0 # Position increment for EE
+        self._incr_pos = 2.0 # Position increment for EE
         self._command_delay = 0.04 # Delay after transmitting motion command
         self._move_speed = 25 # Arm movement speed in mm/s
         self._robot_offset = 97 # Offset between the joint 0 and joint 6 on the xy-plane, in mm.
