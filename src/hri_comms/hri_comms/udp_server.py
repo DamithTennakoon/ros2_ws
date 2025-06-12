@@ -63,13 +63,8 @@ class UdpServer(Node):
     # Define a method to convert robot pose topic data into a transmittable string
     def parse_pose_data(self, msg):
         pose_string = [str(value) for value in msg.data] # Convert float values to a stringed array
-
-        # DEBUG
-        self._tx_data = ','.join(pose_string) + ',POSE'
-        # --
-        #pose_string.insert(0, self._pose_datacode) # Insert the pose data code
-        #self._tx_data = ','.join(pose_string) # Set the transmit message variable to the pose data string seperated with a comma 
-        #self.get_logger().info(f"UPDATED TX DATA: {self._tx_data}")
+        pose_string.insert(0, self._pose_datacode) # Insert the pose data code
+        self._tx_data = ','.join(pose_string) + ',' + self._pose_datacode # Set the transmit message variable to the pose data string seperated with a comma 
 
 def main (args=None):
     rclpy.init(args=args)
