@@ -79,7 +79,7 @@ class KeyEECtrl(Node):
         self._gripper_delay = 1.0 # Delay after transmitting gripper command
 
         # Create/execute callback functions
-        self._move_robot_timer = self.create_timer(0.01, self.move_robot_arm)
+        self._move_robot_timer = self.create_timer(0.1, self.move_robot_arm)
         self._tx_robot_params = self.create_timer(0.01, self.tx_robot_arm)
 
     # Event Handler method - store the raw User Input Segment's keyboard data, locally
@@ -130,11 +130,11 @@ class KeyEECtrl(Node):
     def tx_robot_arm(self):
         # Define the data type and msg variable, retrieve the pose, and store into publisher variable
         pose_msg = Float64MultiArray()
-        raw_coords = self._mc.get_coords()
-        robot_coords = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-        for i in range(len(raw_coords)):
-            robot_coords[i] = raw_coords[i]
-        pose_msg.data = robot_coords
+        #raw_coords = self._mc.get_coords()
+        #robot_coords = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        #for i in range(len(raw_coords)):
+        #    robot_coords[i] = raw_coords[i]
+        pose_msg.data = self._mc.get_coords()
         self._publish_robot_pose.publish(pose_msg)
         self.get_logger().info(f"PUBLISH: {pose_msg.data}")
 
