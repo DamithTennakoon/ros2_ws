@@ -93,12 +93,12 @@ class KeyEECtrl(Node):
     def move_robot_arm(self):
         # Update position vector based on input key data
         if (self._input_key == "UpArrow"):
-            self._cur_position[1] += self._incr_pos # Increment on x-axis
+            self._cur_position[1] -= self._incr_pos # Increment on x-axis
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) # Execute coordinate control command
             time.sleep(self._command_delay) # Delay to move arm to position
         elif (self._input_key == "DownArrow"):
-            self._cur_position[1] -= self._incr_pos
+            self._cur_position[1] += self._incr_pos
             self._cur_position[5] = yaw_axis_alignment(self._cur_position, self._robot_offset)
             self._mc.send_coords(self._cur_position, self._move_speed, 1) 
             time.sleep(self._command_delay) 
