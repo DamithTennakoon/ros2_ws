@@ -58,7 +58,7 @@ class KeyEECtrl(Node):
         # old: [93, -120, 280, 180, 7, 95]
         # [71.7, -188.1, 172.9]
         # []
-        self._mc.send_coords([93, -120, 280, 180, -10, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
+        self._mc.send_coords([93, -120, 280, 180, -7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
         time.sleep(5)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
