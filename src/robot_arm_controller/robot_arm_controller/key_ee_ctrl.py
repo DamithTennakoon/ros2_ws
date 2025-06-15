@@ -51,17 +51,18 @@ class KeyEECtrl(Node):
         time.sleep(1) 
         self.get_logger().info("CONNECTION ESTABLISHED")
 
-        # Initialize robot arm movements
+         # Initialize robot arm movements
         self.get_logger().info("INITIALIZING ROBOT ARM JOINTS AND WORKSPACE")
         self._mc.set_color(255, 0, 0)
         time.sleep(0.5)
-        # old: [93, -120, 280, 180, 7, 95]
-        # [71.7, -188.1, 172.9]
-        # [93, -120, 280, 180, -7, 95] # Ideal for looking down
         self._mc.send_coords([93, -120, 280, 180, 7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
         time.sleep(5)
         self._mc.set_color(255, 255, 255)
         time.sleep(0.5)
+        self._mc.set_gripper_value(20, 50) # Nearly close gripper
+        time.sleep(3)
+        self._mc.set_gripper_value(100, 50) # Open Gripper
+        time.sleep(3)
         self.get_logger().info("ROBOT ARM JOINT INITIALIZATION COMPLETE - STATUS [READY]")
 
         # Create Publisher/Subscriber objects
