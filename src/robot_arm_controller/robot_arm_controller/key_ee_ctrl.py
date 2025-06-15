@@ -57,7 +57,7 @@ class KeyEECtrl(Node):
         time.sleep(0.5)
         # old: [93, -120, 280, 180, 7, 95]
         # [71.7, -188.1, 172.9]
-        # []
+        # [93, -120, 280, 180, -7, 95] # Ideal for looking down
         self._mc.send_coords([93, -120, 280, 180, -7, 95], 10, 1) # Move to initialize position 2 (start pose) using coordinate controller method
         time.sleep(5)
         self._mc.set_color(255, 255, 255)
@@ -72,6 +72,8 @@ class KeyEECtrl(Node):
         # Define variables for local data storage 
         self._input_key = "NONE" # Received string message of the keyboard input
         self._cur_position = self._mc.get_coords() # [x, y, z, pitch, roll, yaw]
+        self._cur_position[3] = 180 # TEMP
+        self._cur_position[4] = -7 # TEMP
         self._incr_pos = 1.0 # Position increment for EE
         self._command_delay = 0.04 # Delay after transmitting motion command
         self._move_speed = 25 # Arm movement speed in mm/s
